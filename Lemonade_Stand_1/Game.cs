@@ -66,22 +66,26 @@ namespace Lemonade_Stand_1
             string numLemonsString = Console.ReadLine();
             int numLemons = Int32.Parse(numLemonsString);
             Console.WriteLine("How many cups of sugar would you like to buy (4 cups per pound)?");
-            string numSugarString = Console.ReadLine();
-            int numSugar = Int32.Parse(numSugarString);
+            string cupsSugarString = Console.ReadLine();
+            int cupsSugar = Int32.Parse(cupsSugarString);
             Console.WriteLine("How many pounds of ice would you like to buy?");
             string numIceString = Console.ReadLine();
             int numIce = Int32.Parse(numIceString);
             //8.  Tally the total amount owed by the Player to the Store.
             double totalPriceCups = numCups * 0.15;
             double totalPriceLemons = numLemons * .25;
-            double totalPriceSugar = numSugar * .15;
+            double totalPriceSugar = cupsSugar * .15;
             double totalPriceIce = numIce * .10;
             double totalCheckoutPrice = totalPriceCups + totalPriceLemons + totalPriceSugar + totalPriceIce;
-            //9.  Subtract the total amount owed from the Player Wallet.
-            player1.playerwallet = player1.playerwallet - totalCheckoutPrice;
+            //9.  Subtract the total amount owed from the Player Wallet.  
+                //create a player method called UpdateWalletAmount
+            player1.playerWallet.amount = player1.playerWallet.amount - totalCheckoutPrice;
             //10.  MOVE the items FROM the STORE INVENTORY OBJECT to the PLAYER INVENTORY OBJECT
-
-            //.  INSTANTIATE a STAND object as a VARIABLE of the PLAYER CLASS
+            //create player method that updates player inventory
+            player1.UpdatePlayerInventory(numCups, numLemons, cupsSugar, numIce);
+            //.  INSTANTIATE a STAND object and CREATE its own INVENTORY object
+            Inventory standInventory = new Inventory(numCups, numLemons, numIce, cupsSugar);
+            Stand stand = new Stand(standInventory);
             //10.  Ask the PLAYER OBJECT how many PITCHERS of lemonade she would like to make for THE DAY OBJECT
             //      -- AND ask the Player Object how many items of EACH SUPPLY she would like to use FROM HER INVENTORY
             //      -- Subtract the number of cups, lemons, sugar, and ice from the PLAYER OBJECT INVENTORY OBJECT

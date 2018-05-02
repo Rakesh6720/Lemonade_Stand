@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    public class Wallet
+    class Stand
     {
-        public double amount;
-
-       public Wallet(double amount)
-        {
-            this.amount = 30.0;
-        }
     }
 }
