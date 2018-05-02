@@ -85,11 +85,25 @@ namespace Lemonade_Stand_1
             player1.UpdatePlayerInventory(numCups, numLemons, cupsSugar, numIce);
             //.  INSTANTIATE a STAND object and CREATE its own INVENTORY object
             Inventory standInventory = new Inventory(numCups, numLemons, numIce, cupsSugar);
-            Stand stand = new Stand(standInventory);
-            //10.  Ask the PLAYER OBJECT how many PITCHERS of lemonade she would like to make for THE DAY OBJECT
+            Stand stand = new Stand(standInventory, 0);
+            //10.  Ask the PLAYER OBJECT how many GALLONS (16 cups of lemonade in one gallon) of lemonade she would like to make for THE STAND OBJECT
+            Console.WriteLine("How many gallons of lemonade would you like to make today?  (1 gallon = 16 cups)");
+            string standGallons = Console.ReadLine();
+            stand.gallons = Int32.Parse(standGallons);
             //      -- AND ask the Player Object how many items of EACH SUPPLY she would like to use FROM HER INVENTORY
+            Console.WriteLine("How many lemons would you like to use in your lemonade today?");
+            int numLemonsUse = Int32.Parse(Console.ReadLine());
             //      -- Subtract the number of cups, lemons, sugar, and ice from the PLAYER OBJECT INVENTORY OBJECT
-            //      -- 
+            player1.playerInventory.numLemons -= numLemonsUse;
+            Console.WriteLine("How many cups of sugar would you like to use?");
+            int numSugarUse = Int32.Parse(Console.ReadLine());
+            player1.playerInventory.cupsSugar -= numSugarUse;
+            Console.WriteLine("How many pounds of ice would you like to use?");
+            int numIceUse = Int32.Parse(Console.ReadLine());
+            player1.playerInventory.poundsIce -= numIceUse;
+            
+           
+            
             //11.  INSTANTIATE a CUSTOMER object from the CUSTOMER CLASS.
             //      -- does the customer have a wallet object, too?
             //      -- if the customer does have a wallet object then how much is inside of it?
