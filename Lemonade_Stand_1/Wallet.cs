@@ -8,11 +8,29 @@ namespace Lemonade_Stand_1
 {
     public class Wallet
     {
-        public double amount;
+        double amount;
 
        public Wallet(double amount)
         {
             this.amount = 30.0;
+        }
+
+        public double Amount
+        {
+            get
+            {
+                return amount;
+            }
+            set
+            {
+                amount = value;
+            }
+        }
+
+        public double Debit(double walletAmount, double cost)
+        {
+            double result = walletAmount - cost;
+            return result;
         }
     }
 }

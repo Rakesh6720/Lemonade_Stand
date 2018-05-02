@@ -8,7 +8,7 @@ namespace Lemonade_Stand_1
 {
     public abstract class Supplies
     {
-        string name;
+        //string name;
         int price;
         int amount;
     }

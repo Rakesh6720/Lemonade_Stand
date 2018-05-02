@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    public abstract class Fruits
+    abstract class Fruits : Supplies
     {
         string name;
-        int amount;
         int price;
         int decayValue;
     }

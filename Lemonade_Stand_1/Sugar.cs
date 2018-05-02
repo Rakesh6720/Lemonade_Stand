@@ -8,8 +8,19 @@ namespace Lemonade_Stand_1
 {
     class Sugar : Supplies
     {
-        int price; //price per a cup?
-        int amount;//in cups?
+        double price; //price per a cup?
+        
+        public double Price
+        {
+            get
+            {
+                return price;
+            }
+            set
+            {
+                price = value;
+            }
+        }
         
     }
 }

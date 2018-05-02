@@ -8,8 +8,8 @@ namespace Lemonade_Stand_1
 {
     public class Player
     {
-        Wallet playerWallet;
-        Inventory playerInventory;
+        public Wallet playerWallet;
+        public Inventory playerInventory;
         public string name;
 
         public Player(string name)

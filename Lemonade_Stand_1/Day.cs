@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    class Day
+    public class Day
     {
         Weather weather;
         List<Customer> customers;
@@ -17,6 +17,30 @@ namespace Lemonade_Stand_1
 
             this.customers = CreateCustomerList();
 
+        }
+
+        public Weather Weather
+        {
+            get
+            {
+                return weather;
+            }
+            set
+            {
+                weather = value;
+            }
+        }
+
+        public List<Customer>Customers
+        {
+            get
+            {
+                return customers;
+            }
+            set
+            {
+                customers = value;
+            }
         }
 
         public List<Customer> CreateCustomerList()
