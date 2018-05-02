@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    class Cups
+    class Cups : Supplies
     {
         int price;
         int amount;

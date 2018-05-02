@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    class Day
+    public class Day
     {
+        //Weather weather; //a day has weather
+        //Customers customers;// a day has customers
     }
 }

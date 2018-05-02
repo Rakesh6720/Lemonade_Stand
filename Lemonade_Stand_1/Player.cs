@@ -8,16 +8,15 @@ namespace Lemonade_Stand_1
 {
     public class Player
     {
-        Wallet wallet;
-        Inventory inventory;
-        string name;
+        Wallet playerWallet;
+        Inventory playerInventory;
+        public string name;
 
         public Player(Wallet playerWallet, Inventory playerInventory, string playerName)
         {
-            this.wallet = playerWallet;
-            this.inventory = playerInventory;
+            this.playerWallet = playerWallet;
+            this.playerInventory = playerInventory;
             this.name = playerName;
-
         }
     }
 }

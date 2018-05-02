@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    class Store
+   public class Store
     {
+        Inventory storeInventory;
+
+        public Store(Inventory storeInventory)
+        {
+            this.storeInventory = storeInventory;
+
+        }
     }
 }

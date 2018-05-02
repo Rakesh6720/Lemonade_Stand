@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    class Sugar
+    class Sugar : Supplies
     {
+        int price; //price per a cup?
+        int amount;//in cups?
+        
     }
 }

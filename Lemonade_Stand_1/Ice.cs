@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    class Grocery_Store
+    public class Ice : Supplies
     {
+        int cost; // cost per pound
+        int amount; //amount in pounds
+        int decayValue = 1; //ice will only last one day
     }
 }
