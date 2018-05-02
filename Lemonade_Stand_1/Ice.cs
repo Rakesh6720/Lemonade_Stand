@@ -6,10 +6,39 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    public class Ice : Supplies
+    class Ice : Supplies
     {
-        int cost; // cost per pound
-        int amount; //amount in pounds
-        int decayValue = 1; //ice will only last one day
+        double price;
+        int decayValue;
+
+        public Ice()
+        {
+            this.price = 0.10; // cost per pound
+            this.decayValue = 1; //ice will only last one day
+        }
+
+        public double Price
+        {
+            get
+            {
+                return price;
+            }
+            set
+            {
+                price = value;
+            }
+        }
+
+        public int DecayValue
+        {
+            get
+            {
+                return decayValue;
+            }
+            set
+            {
+                decayValue = value;
+            }
+        }
     }
 }

@@ -6,21 +6,19 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    public class Weather
+    class Weather
     {
         int temperature;
         bool isSunny;
-        bool isCloudy;
+        bool isOvercast;
         bool isRaining;
-        bool isWindy;
 
-        public Weather(int temperature, bool isSunny, bool isCloudy, bool isRaining, bool isWindy)
-        { 
+        public Weather(int temperature, bool isSunny, bool isOvercast, bool isRaining)
+        {
             this.temperature = temperature;
             this.isSunny = isSunny;
-            this.isCloudy = isCloudy;
+            this.isOvercast = isOvercast;
             this.isRaining = isRaining;
-            this.isWindy = isWindy;
         }
     }
 }

@@ -8,10 +8,10 @@ namespace Lemonade_Stand_1
 {
    public class Inventory
     {
-        int numCups;
-        int numLemons;
-        int poundsIce;
-        int cupsSugar;
+        public int numCups;
+        public int numLemons;
+        public int poundsIce;
+        public int cupsSugar;
 
         public Inventory(int numCups, int numLemons, int poundsIce, int cupsSugar)
         {

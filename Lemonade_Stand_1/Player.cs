@@ -8,8 +8,8 @@ namespace Lemonade_Stand_1
 {
     public class Player
     {
-        Wallet playerWallet;
-        Inventory playerInventory;
+        public Wallet playerWallet;
+        public Inventory playerInventory;
         public string name;
 
         public Player(Wallet playerWallet, Inventory playerInventory, string playerName)
@@ -17,6 +17,14 @@ namespace Lemonade_Stand_1
             this.playerWallet = playerWallet;
             this.playerInventory = playerInventory;
             this.name = playerName;
+        }
+
+        public void UpdatePlayerInventory(int numCups, int numLemons, int cupsSugar, int numIce)
+        {
+            playerInventory.numCups = numCups;
+            playerInventory.numLemons = numLemons;
+            playerInventory.cupsSugar = cupsSugar;
+            playerInventory.poundsIce = numIce;
         }
     }
 }
