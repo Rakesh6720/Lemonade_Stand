@@ -51,8 +51,7 @@ namespace Lemonade_Stand_1
             Day day1 = new Day();
 
             //4.  Give the player the forecast for the current day.
-            Weather weatherDay1 = new Weather(80, true, false);
-            
+            UserInterface.DisplayWeather(day1);
 
             //.  INSTANTIATE a STORE object that has an inventory object of supplies
             Inventory newStoreInventory = new Inventory(0, 0, 0, 0);
@@ -125,15 +124,13 @@ namespace Lemonade_Stand_1
             UserInterface.AskForLemonadePrice();
             double priceLemonade = Int32.Parse(Console.ReadLine());
 
-            //11.  INSTANTIATE a CUSTOMER object from the CUSTOMER CLASS.
-            //  determine the number of CUSTOMER OBJECTS to INSTANTIATE based on PRICE and WEATHER
-            Customer customer1 = new Customer(false);
-            //      -- what is the likelihood that a customer will buy?  true/false = willBuy
-            bool willBuy = customer1.DetermineIfCustomerBuy();
-            int numCupsBought = customer1.DetermineNumCupsWillBuy(willBuy);
-            //      -- how will the weather affect the customer's decision to buy?
-            //      -- how will the price of the lemonade impact the customer's decision to buy?
-            //      -- how will the taste of the lemonade impact the customer's decision to buy?
+          //11.  CREATE LOOP METHODS in CUSTOMER CLASS to determine how many customers will buy and how many cups they will buy
+            day1.Customers[0].WillBuy = day1.Customers[0].DetermineIfCustomerBuy(day1);
+            int numCupsBought = day1.Customers[0].DetermineNumCupsWillBuy(day1.Customers[0]);
+
+            
+            //      -- how will the price of the lemonade impact the customer's decision to buy?  MUST STILL DO
+            //      -- how will the taste of the lemonade impact the customer's decision to buy?  MUST STILL DO
             //12.  Call a method from the CUSTOMER CLASS that take into account the PRESENT WEATHER to inform her DECISION to BUY lemonade FROM STAND object
             //13.  Tally the Total Amount of money earned by the STAND object's WALLET object.  
             double amountEarned = priceLemonade * numCupsBought;

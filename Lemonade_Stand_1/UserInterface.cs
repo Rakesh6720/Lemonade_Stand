@@ -69,5 +69,35 @@ namespace Lemonade_Stand_1
         { 
             Console.WriteLine("Enter the price of each cup of lemonade: ");
         }
+
+        public static void DisplayWeather(Day day1)
+        {
+            if (day1.Weather.IsSunny == true && day1.Weather.IsRaining == true)
+            {
+                string sunny = "sunny";
+                string rainy = "rainy";
+                Console.WriteLine("The forecast for today is: " + day1.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
+            }
+            else if (day1.Weather.IsSunny == false && day1.Weather.IsRaining == true)
+            {
+                string sunny = "cloudy";
+                string rainy = "rainy";
+                Console.WriteLine("The forecast for today is: " + day1.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
+            }
+
+            else if (day1.Weather.IsSunny == false && day1.Weather.IsRaining == false)
+            {
+                string sunny = "cloudy";
+                string rainy = "clear";
+                Console.WriteLine("The forecast for today is: " + day1.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
+            }
+            else
+            {
+                string sunny = "sunny";
+                string rainy = "clear";
+                Console.WriteLine("The forecast for today is: " + day1.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
+            }
+            
+        }
     }
 }

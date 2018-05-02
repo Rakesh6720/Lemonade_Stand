@@ -8,16 +8,27 @@ namespace Lemonade_Stand_1
 {
     public class Customer
     {
-        public bool willBuy;
+        bool willBuy;
+        //double maxPrice;
 
-        public Customer(bool willBuy)
+        public Customer()
         {
-            this.willBuy = willBuy;
+            this.willBuy = false;
         }
-
-        public bool DetermineIfCustomerBuy(Weather weather)
+        public bool WillBuy
         {
-            if (weather.Temperature > 80 && weather.IsSunny = true && weather.IsRaining = false)
+            get
+            {
+                return willBuy;
+            }
+            set
+            {
+                willBuy = value;
+            }
+        }
+        public bool DetermineIfCustomerBuy(Day day)
+        {
+            if (day.Weather.Temperature > 80 && day.Weather.IsSunny == true && day.Weather.IsRaining == false)
             {
                 Random random = new Random();
                 int result = random.Next(6, 10) / 10 * 100;
@@ -31,7 +42,7 @@ namespace Lemonade_Stand_1
                 }
 
             }
-            else if (weather.Temperature > 80 && weather.IsSunny = true && weather.IsRaining = true)
+            else if (day.Weather.Temperature > 80 && day.Weather.IsSunny == true && day.Weather.IsRaining == true)
             {
                 Random random = new Random();
                 int result = random.Next(2, 7) / 10 * 100;
@@ -44,7 +55,7 @@ namespace Lemonade_Stand_1
                     return false;
                 }
             }
-            else if (weather.Temperature<80 && weather.IsSunny = true && weather.IsRaining = false)
+            else if (day.Weather.Temperature<80 && day.Weather.IsSunny == true && day.Weather.IsRaining == false)
             {
                 Random random = new Random();
                 int result = random.Next(1, 8) / 10 * 100;
@@ -75,9 +86,9 @@ namespace Lemonade_Stand_1
         //    return this.willBuy;
         //}
 
-        public int DetermineNumCupsWillBuy(bool willBuy)
+        public int DetermineNumCupsWillBuy(Customer customer)
         {
-            if (willBuy == true)
+            if (customer.willBuy == true)
             {
                 Random random = new Random();
                 int numCupsBuy = random.Next(1, 5);
