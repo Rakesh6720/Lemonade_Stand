@@ -15,20 +15,65 @@ namespace Lemonade_Stand_1
             this.willBuy = willBuy;
         }
 
-        public bool DetermineIfCustomerBuy()
+        public bool DetermineIfCustomerBuy(Weather weather)
         {
-            Random random = new Random();
-            int randomNum = random.Next(1, 11);
-            if (randomNum % 2 == 0)
+            if (weather.Temperature > 80 && weather.IsSunny = true && weather.IsRaining = false)
             {
-                this.willBuy = true;
+                Random random = new Random();
+                int result = random.Next(6, 10) / 10 * 100;
+                if (result > 70)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+            else if (weather.Temperature > 80 && weather.IsSunny = true && weather.IsRaining = true)
+            {
+                Random random = new Random();
+                int result = random.Next(2, 7) / 10 * 100;
+                if (result > 40)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (weather.Temperature<80 && weather.IsSunny = true && weather.IsRaining = false)
+            {
+                Random random = new Random();
+                int result = random.Next(1, 8) / 10 * 100;
+                if (result > 50)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                this.willBuy = false;
+                return false;
             }
-            return this.willBuy;
         }
+        //    Random random = new Random();
+        //    int randomNum = random.Next(1, 11);
+        //    if (randomNum % 2 == 0)
+        //    {
+        //        this.willBuy = true;
+        //    }
+        //    else
+        //    {
+        //        this.willBuy = false;
+        //    }
+        //    return this.willBuy;
+        //}
 
         public int DetermineNumCupsWillBuy(bool willBuy)
         {
