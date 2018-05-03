@@ -7,14 +7,24 @@ using System.Threading.Tasks;
 namespace Lemonade_Stand_1
 {
     public class Stand
-    {
-        public Inventory inventory;
-        public int gallons;
+    { 
+        int gallons;
 
-        public Stand(Inventory standInventory, int gallons)
+        public Stand()
         {
-            this.inventory = standInventory;
-            this.gallons = gallons;
+           
+        }
+
+        public int Gallons
+        {
+            get
+            {
+                return gallons;
+            }
+            set
+            {
+                gallons = value;
+            }
         }
     }
 }

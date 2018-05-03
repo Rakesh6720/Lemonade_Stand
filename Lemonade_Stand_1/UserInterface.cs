@@ -29,18 +29,37 @@ namespace Lemonade_Stand_1
                 Console.WriteLine("How many pounds of {0} would you like to buy?", item);
             }
             else
-            { 
-            Console.WriteLine("How many {0} would you like to buy?", item);
+            {
+                Console.WriteLine("How many {0} would you like to buy?", item);
             }
         }
-        public static void DisplayCost(Store store, double itemPrice, int numItems)
+        public static void DisplayStoreTransaction(int numCups, double numCupsCost, Player player)
+          {
+            Console.WriteLine($"Cost of {numCups} cups: ${numCupsCost}");
+            double theoreticalCost = player.PlayerWallet.Amount - numCups;
+            Console.WriteLine("Money remaining in your wallet: $" + theoreticalCost + ".");
+          }
+        public static void DisplayConfirmation(int numItems, double costItems, Player player, string item, Store store)
         {
-            double result = store.CalculateCost(itemPrice, numItems);
-            Console.WriteLine("Cost: $ " + result);
+            Console.WriteLine("Would you like to confirm this purchase? Y/N");
+            string userInput = Console.ReadLine();
+            if (userInput == "y" || userInput == "Y")
+            {
+                store.ExecutePurchase(numItems, costItems, player);
+            }
+            else if (userInput == "n" || userInput == "N")
+            {
+                AskToBuy(item);
+            }
+            else
+            {
+                Console.WriteLine("Please enter a valid respone: Y/N");
+                DisplayConfirmation(numItems, costItems, player, item, store);
+            }
         }
-        public static void DisplayPlayerWalletStatus(Player player)
+    public static void DisplayPlayerWalletStatus(Player player)
         {
-            Console.WriteLine("You have $" + player.PlayerWallet.Amount + "left in your treasury.");
+            Console.WriteLine("You have $" + player.PlayerWallet.Amount + "left in your personal account.");
         }
 
         public static void DisplayCheckoutPrice(double checkoutPrice)

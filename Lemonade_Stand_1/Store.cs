@@ -15,11 +15,16 @@ namespace Lemonade_Stand_1
             this.inventory = storeInventory;
 
         }
-
-        public double CalculateCost(double itemPrice, int numItems)
+        public void ExecutePurchase(int numItems, double costItems, Player player)
         {
-            double result = itemPrice * numItems;
-            Console.WriteLine("Cost: $ " + result);
+            double paidAmount = player.PlayerWallet.Amount - costItems;
+            Console.WriteLine($"{numItems} purchased.\n Money remaining in personal account: ${paidAmount}");
+            player.PlayerWallet.Debit(player, player.PlayerWallet.Amount, costItems);
+        }
+        public double CalculateCost(Supplies supply, int numItems)
+        {
+            double result = supply.Price * numItems;
+            
             return result;
         }
 

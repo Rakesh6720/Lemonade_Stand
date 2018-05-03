@@ -68,9 +68,9 @@ namespace Lemonade_Stand_1
                 string userName = Console.ReadLine();
                 //create player wallet and player inventory objects
                 Wallet playerWallet = new Wallet();
-                Inventory playerInventory = new Inventory();
+                //List<Supplies> playerInventory = new List<Supplies>();
                 //2.  Create player1 and pass into player1 object the instance of playerWallet and playerInventory
-                player1 = new Player(userName, playerWallet, playerInventory);
+                player1 = new Player(userName, playerWallet);
             }
             else
             {
@@ -90,8 +90,9 @@ namespace Lemonade_Stand_1
             UserInterface.DisplayWeather(day1);
 
             //.  INSTANTIATE a STORE object that has an inventory object of supplies
-            Inventory newStoreInventory = new Inventory();
-            Store store1 = new Store(newStoreInventory);
+            Supplies supplies = new Supplies();
+            List<Supplies> storeInventory = supplies.CreateInventory(0, 0, 0, 0);
+            Store store1 = new Store(storeInventory);
 
             //5.  Take the plalyer to the STORE.  
             //6.  Display to the player how much eat item costs.
@@ -99,38 +100,41 @@ namespace Lemonade_Stand_1
 
             //7.  Ask the player how many of each item they would like to buy.
             UserInterface.AskToBuy("cups");
+            string supplyItem = "cups";
             string numCupsString = Console.ReadLine();
             int numCups = Int32.Parse(numCupsString);
             Cup cup = new Cup();
             double numCupsCost = store1.CalculateCost(cup, numCups);
-            Console.WriteLine($"Cost of {numCups} cups: ${numCupsCost}");
-            double theoreticalCost = player1.PlayerWallet.Amount - numCups;
-            Console.WriteLine("Money remaining in your wallet: $" + theoreticalCost + ".");
-            Console.WriteLine("Would you like to confirm this purchase? Y/N");
-            string userInput = Console.ReadLine();
-            if (userInput == "y" || userInput == "Y")
-            {
-                Console.WriteLine($"{numCups} purchased.\n Money remaining in personal account: ${theoreticalCost}");
-                player1.PlayerWallet.Debit(player1, player1.PlayerWallet.Amount, numCupsCost);
-            }
+            UserInterface.DisplayStoreTransaction(numCups, numCupsCost, player1);
+            UserInterface.DisplayConfirmation(numCups, numCupsCost, player1, supplyItem, store1);
+           
 
-            UserInterface.AskToBuy("lemons"); 
+            UserInterface.AskToBuy("lemons");
+            supplyItem = "lemons";
             string numLemonsString = Console.ReadLine();
             int numLemons = Int32.Parse(numLemonsString);
             Lemon lemon = new Lemon();
             double numLemonsCost = store1.CalculateCost(lemon, numLemons);
+            UserInterface.DisplayStoreTransaction(numLemons, numLemonsCost, player1);
+            UserInterface.DisplayConfirmation(numLemons, numLemonsCost, player1, supplyItem, store1);
 
             UserInterface.AskToBuy("sugar");
+            supplyItem = "sugar";
             string cupsSugarString = Console.ReadLine();
             int cupsSugar = Int32.Parse(cupsSugarString);
             Sugar sugar = new Sugar();
             double cupsSugarCost = store1.CalculateCost(sugar, cupsSugar);
+            UserInterface.DisplayStoreTransaction(cupsSugar, cupsSugarCost, player1);
+            UserInterface.DisplayConfirmation(cupsSugar, cupsSugarCost, player1, supplyItem, store1);
 
             UserInterface.AskToBuy("ice");
+            supplyItem = "ice";
             string numIceString = Console.ReadLine();
             int numIce = Int32.Parse(numIceString);
             Ice ice = new Ice();
             double numIceCost = store1.CalculateCost(ice, numIce);
+            UserInterface.DisplayStoreTransaction(numIce, numIceCost, player1);
+            UserInterface.DisplayConfirmation(numIce, numIceCost, player1, supplyItem, store1);
 
             //8.  Tally the total amount owed by the Player to the Store.
             double totalCheckOutPrice = store1.Checkout(numCups, numLemons, cupsSugar, numIce);
@@ -141,7 +145,7 @@ namespace Lemonade_Stand_1
             //9.  Subtract the total amount owed from the Player Wallet.  
             try
             { 
-            player1.PlayerWallet.Debit(player1.PlayerWallet.Amount, totalCheckOutPrice);
+            player1.PlayerWallet.Debit(player1, player1.PlayerWallet.Amount, totalCheckOutPrice);
             }
             catch (Exception)
             {
@@ -151,20 +155,21 @@ namespace Lemonade_Stand_1
 
             //DISPLAY the player's wallet status
             UserInterface.DisplayPlayerWalletStatus(player1);
-            
+
             //10.  MOVE the items FROM the STORE INVENTORY OBJECT to the PLAYER INVENTORY OBJECT
             //create player method that updates player inventory
-            player1.UpdatePlayerInventory(numCups, numLemons, cupsSugar, numIce);
+            List<Supplies> playerInventory = supplies.CreateInventory(numCups, numLemons, numIce, cupsSugar);
+            player1.PlayerInventory = playerInventory;
 
             //.  INSTANTIATE a STAND object and CREATE its own INVENTORY object
             Inventory standInventory = new Inventory();
-            standInventory = standInventory.CreateInventory(standInventory, numCups, numLemons, numIce, cupsSugar);
-            Stand stand = new Stand(standInventory, 0);
+            //standInventory = standInventory.CreateInventory(standInventory, numCups, numLemons, numIce, cupsSugar);
+            Stand stand = new Stand();
 
             //10.  Ask the PLAYER OBJECT how many GALLONS (16 cups of lemonade in one gallon) of lemonade she would like to make for THE STAND OBJECT
             UserInterface.AskNumberGallons();
             string standGallons = Console.ReadLine();
-            stand.gallons = Int32.Parse(standGallons);
+            stand.Gallons = Int32.Parse(standGallons);
 
             //-- AND ask the Player Object how many items of EACH SUPPLY she would like to use FROM HER INVENTORY
             UserInterface.AskNumberToUse("lemons");
