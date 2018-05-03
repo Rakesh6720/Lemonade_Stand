@@ -16,7 +16,14 @@ namespace Lemonade_Stand_1
 
         }
 
-        public double Checkout(int numCups, int numLemons, int cupsSugar, int numIce)
+        public double CalculateCost(double itemPrice, int numItems)
+        {
+            double result = itemPrice * numItems;
+            Console.WriteLine("Cost: $ " + result);
+            return result;
+        }
+
+            public double Checkout(int numCups, int numLemons, int cupsSugar, int numIce)
         {
             Cup cup = new Cup();
             Lemon lemon = new Lemon();

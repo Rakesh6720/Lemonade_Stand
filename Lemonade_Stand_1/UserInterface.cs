@@ -36,7 +36,7 @@ namespace Lemonade_Stand_1
 
         public static void DisplayPlayerWalletStatus(Player player)
         {
-            Console.WriteLine("You have $" + player.playerWallet.Amount + "left in your treasury.");
+            Console.WriteLine("You have $" + player.PlayerWallet.Amount + "left in your treasury.");
         }
 
         public static void DisplayCheckoutPrice(double checkoutPrice)

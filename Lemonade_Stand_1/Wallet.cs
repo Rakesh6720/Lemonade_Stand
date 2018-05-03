@@ -10,7 +10,7 @@ namespace Lemonade_Stand_1
     {
         double amount;
 
-       public Wallet(double amount)
+       public Wallet()
         {
             this.amount = 30.0;
         }

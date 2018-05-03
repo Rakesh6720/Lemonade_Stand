@@ -45,8 +45,18 @@ namespace Lemonade_Stand_1
         {
             Console.WriteLine("Please enter the number of players: ");
             string userInput = Console.ReadLine();
+            try
+            { 
             int numOfPlayers = Int32.Parse(userInput);
             return numOfPlayers;
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Please enter a valid number of players.  Press any key to try again...");
+                Console.ReadLine();
+                GetNumOfPlayers();
+                return 1;
+            }
         }
 
         //  Assume it is one player for now.
@@ -60,7 +70,7 @@ namespace Lemonade_Stand_1
                 Wallet playerWallet = new Wallet();
                 Inventory playerInventory = new Inventory();
                 //2.  Create player1 and pass into player1 object the instance of playerWallet and playerInventory
-                player1 = new Player(userName);
+                player1 = new Player(userName, playerWallet, playerInventory);
             }
             else
             {
@@ -113,7 +123,15 @@ namespace Lemonade_Stand_1
             UserInterface.DisplayCheckoutPrice(totalCheckOutPrice);
 
             //9.  Subtract the total amount owed from the Player Wallet.  
+            try
+            { 
             player1.PlayerWallet.Debit(player1.PlayerWallet.Amount, totalCheckOutPrice);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("You ran out of money!\nGAME OVER!");
+                Console.ReadLine();
+            }
 
             //DISPLAY the player's wallet status
             UserInterface.DisplayPlayerWalletStatus(player1);

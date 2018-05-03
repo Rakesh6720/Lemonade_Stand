@@ -9,6 +9,11 @@ namespace Lemonade_Stand_1
     class Sugar : Supplies
     {
         double price; //price per a cup?
+
+        public Sugar()
+        {
+            this.price = .25;
+        }
         
         public double Price
         {

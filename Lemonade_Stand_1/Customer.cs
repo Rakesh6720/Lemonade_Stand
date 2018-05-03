@@ -27,24 +27,7 @@ namespace Lemonade_Stand_1
             }
         }
 
-        public int CalculateBuyingCustomers(Day day, List<Customer> Customers, double lemonadePrice)
-        {
-            int numberOfBuyingCustomers = 0;
-            foreach (Customer customer in Customers)
-            {
-                if (DetermineIfCustomerBuyWeather(day) == true && DetermineIfCustomerBuyPrice(day, lemonadePrice) == true)
-                {
-                    //customer.WillBuy = true;
-                    numberOfBuyingCustomers++;
-                    return numberOfBuyingCustomers;
-                }
-                else
-                {
-                    return numberOfBuyingCustomers;
-                }
-            }
-            return numberOfBuyingCustomers;
-        }
+    
 
         public bool DetermineIfCustomerBuyPrice(Day day, double lemonadePrice)
         {
@@ -151,20 +134,6 @@ namespace Lemonade_Stand_1
             }
         }
 
-        public int DetermineNumCupsWillBuy(List<Customer> customers)
-        {
-            if (customer.willBuy == true)
-            {
-                Random random = new Random();
-                int numCupsBuy = random.Next(1, 5);
-                return numCupsBuy;
-            }
-            else
-            {
-                int numCupsBuy = 0;
-                return numCupsBuy;
-            }
-
-        }
+        
     }
 }
