@@ -6,30 +6,18 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-   public class Inventory
+    public class Inventory
     {
-        List<Inventory> inventory;
-        int numCups;
-        int numLemons;
-        int poundsIce;
-        int cupsSugar;
+
 
         public Inventory()
         {
-            this.numCups = 0;
-            this.numLemons = 0;
-            this.poundsIce = 0;
-            this.cupsSugar = 0;
-        }
-
-        public Inventory CreateInventory(Inventory inventory, int numCups, int numLemons, int poundsIce, int cupsSugar)
-        {
-            inventory.numCups = numCups;
-            inventory.numLemons = numLemons;
-            inventory.poundsIce = poundsIce;
-            inventory.cupsSugar = cupsSugar;
-
-            return inventory;
+            Cup cup = new Cup("cup");
+            Lemon lemon = new Lemon("lemon");
+            Ice ice = new Ice("ice");
+            Sugar sugar = new Sugar("sugar");
         }
     }
 }
+
+

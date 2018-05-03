@@ -9,17 +9,17 @@ namespace Lemonade_Stand_1
     public class Player
     {
         Wallet playerWallet;
-        Inventory playerInventory;
+        List<Supplies> playerInventory;
         public string name;
 
-        public Player(string name, Wallet playerWallet, Inventory playerInventory)
+        public Player(string name, Wallet playerWallet)
         {
             this.name = name;
             this.playerWallet = playerWallet;
-            this.playerInventory = playerInventory;
+            
         }
 
-        public Inventory PlayerInventory
+        public List<Supplies> PlayerInventory
         {
             get
             {
@@ -45,10 +45,18 @@ namespace Lemonade_Stand_1
 
         public void UpdatePlayerInventory(int numCups, int numLemons, int cupsSugar, int numIce)
         {
-            playerInventory.numCups = numCups;
-            playerInventory.numLemons = numLemons;
-            playerInventory.cupsSugar = cupsSugar;
-            playerInventory.poundsIce = numIce;
+           
+        }
+
+        public void RemoveFromInventory(Player player, int numItems, Supplies supply)
+        {
+            foreach(Supplies item in player.playerInventory)
+            {
+                if (supply.Name == item.Name)
+                {
+                    player.playerInventory.Remove(item);
+                }
+            }
         }
     }
 }

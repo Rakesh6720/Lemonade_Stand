@@ -8,11 +8,11 @@ namespace Lemonade_Stand_1
 {
    public class Store
     {
-        Inventory inventory;
+        List<Supplies> inventory;
 
-        public Store(Inventory storeInventory)
+        public Store(List<Supplies> inventory)
         {
-            this.inventory = storeInventory;
+            this.inventory = inventory;
 
         }
         public void ExecutePurchase(int numItems, double costItems, Player player)
@@ -30,10 +30,10 @@ namespace Lemonade_Stand_1
 
             public double Checkout(int numCups, int numLemons, int cupsSugar, int numIce)
         {
-            Cup cup = new Cup();
-            Lemon lemon = new Lemon();
-            Sugar sugar = new Sugar();
-            Ice ice = new Ice();
+            Cup cup = new Cup("cup");
+            Lemon lemon = new Lemon("lemon");
+            Sugar sugar = new Sugar("sugar");
+            Ice ice = new Ice("ice");
 
             double result = (numCups * cup.Price) + (numLemons * lemon.Price) + (cupsSugar * sugar.Price) + (numIce * ice.Price);
             return result;

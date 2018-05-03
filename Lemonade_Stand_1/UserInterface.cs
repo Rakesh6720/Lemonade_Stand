@@ -10,10 +10,10 @@ namespace Lemonade_Stand_1
     {
         public static void DisplayPrices()
         {
-            Cup cup = new Cup();
-            Lemon lemon = new Lemon();
-            Sugar sugar = new Sugar();
-            Ice ice = new Ice();
+            Cup cup = new Cup("cup");
+            Lemon lemon = new Lemon("lemon");
+            Sugar sugar = new Sugar("sugar");
+            Ice ice = new Ice("ice");
 
             Console.WriteLine("The prices of each item are:\nCups -- " + cup.Price + "\nLemons -- " + lemon.Price + "\nSugar -- " + sugar.Price + " per cup\nIce -- " + ice.Price + " per pound");
         }

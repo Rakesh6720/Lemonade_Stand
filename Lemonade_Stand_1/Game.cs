@@ -103,7 +103,7 @@ namespace Lemonade_Stand_1
             string supplyItem = "cups";
             string numCupsString = Console.ReadLine();
             int numCups = Int32.Parse(numCupsString);
-            Cup cup = new Cup();
+            Cup cup = new Cup(supplyItem);
             double numCupsCost = store1.CalculateCost(cup, numCups);
             UserInterface.DisplayStoreTransaction(numCups, numCupsCost, player1);
             UserInterface.DisplayConfirmation(numCups, numCupsCost, player1, supplyItem, store1);
@@ -113,7 +113,7 @@ namespace Lemonade_Stand_1
             supplyItem = "lemons";
             string numLemonsString = Console.ReadLine();
             int numLemons = Int32.Parse(numLemonsString);
-            Lemon lemon = new Lemon();
+            Lemon lemon = new Lemon(supplyItem);
             double numLemonsCost = store1.CalculateCost(lemon, numLemons);
             UserInterface.DisplayStoreTransaction(numLemons, numLemonsCost, player1);
             UserInterface.DisplayConfirmation(numLemons, numLemonsCost, player1, supplyItem, store1);
@@ -122,7 +122,7 @@ namespace Lemonade_Stand_1
             supplyItem = "sugar";
             string cupsSugarString = Console.ReadLine();
             int cupsSugar = Int32.Parse(cupsSugarString);
-            Sugar sugar = new Sugar();
+            Sugar sugar = new Sugar(supplyItem);
             double cupsSugarCost = store1.CalculateCost(sugar, cupsSugar);
             UserInterface.DisplayStoreTransaction(cupsSugar, cupsSugarCost, player1);
             UserInterface.DisplayConfirmation(cupsSugar, cupsSugarCost, player1, supplyItem, store1);
@@ -131,7 +131,7 @@ namespace Lemonade_Stand_1
             supplyItem = "ice";
             string numIceString = Console.ReadLine();
             int numIce = Int32.Parse(numIceString);
-            Ice ice = new Ice();
+            Ice ice = new Ice(supplyItem);
             double numIceCost = store1.CalculateCost(ice, numIce);
             UserInterface.DisplayStoreTransaction(numIce, numIceCost, player1);
             UserInterface.DisplayConfirmation(numIce, numIceCost, player1, supplyItem, store1);
@@ -176,15 +176,16 @@ namespace Lemonade_Stand_1
             int numLemonsUse = Int32.Parse(Console.ReadLine());
 
             //-- Subtract the number of cups, lemons, sugar, and ice from the PLAYER OBJECT INVENTORY OBJECT
-            player1.PlayerInventory.numLemons -= numLemonsUse;
+            player1.RemoveFromInventory(player1, numLemonsUse, lemon);
+            //player1.PlayerInventory.numLemons -= numLemonsUse;
 
             UserInterface.AskNumberToUse("sugar");
             int numSugarUse = Int32.Parse(Console.ReadLine());
-            player1.PlayerInventory.cupsSugar -= numSugarUse;
+            player1.RemoveFromInventory(player1, numSugarUse, sugar);
 
             UserInterface.AskNumberToUse("ice");
             int numIceUse = Int32.Parse(Console.ReadLine());
-            player1.PlayerInventory.poundsIce -= numIceUse;
+            player1.RemoveFromInventory(player1, numIceUse, ice);
 
             //ask the player to set the price of each cup of lemonade
             UserInterface.AskForLemonadePrice();

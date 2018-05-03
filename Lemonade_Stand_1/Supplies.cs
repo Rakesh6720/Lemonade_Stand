@@ -6,12 +6,28 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    public abstract class Supplies
+    public class Supplies
     {
-        //string name;
+        string name;
         double price;
         //int amount;
 
+        public Supplies()
+        {
+            
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
         public double Price
         {
             get
@@ -23,27 +39,27 @@ namespace Lemonade_Stand_1
                 price = value;
             }
         }
-        public List<Supplies> CreateSuppliesList(int numCups, int numLemons, int poundsIce, int cupsSugar)
+        public List<Supplies> CreateInventory(int numCups, int numLemons, int poundsIce, int cupsSugar)
         {
             List<Supplies> suppliesList = new List<Supplies>();
             for (int i = 0; i < numCups; i++)
             {
-                Cup cup = new Cup();
+                Cup cup = new Cup("cup");
                 suppliesList.Add(cup);
             }
             for (int i = 0; i < numLemons; i++)
             {
-                Lemon lemon = new Lemon();
+                Lemon lemon = new Lemon("lemon");
                 suppliesList.Add(lemon);
             }
             for (int i = 0; i < poundsIce; i++)
             {
-                Ice ice = new Ice();
+                Ice ice = new Ice("ice");
                 suppliesList.Add(ice);
             }
             for (int i = 0; i < cupsSugar; i++)
             {
-                Sugar sugar = new Sugar();
+                Sugar sugar = new Sugar("sugar");
                 suppliesList.Add(sugar);
             }
             return suppliesList;
