@@ -27,10 +27,10 @@ namespace Lemonade_Stand_1
             }
         }
 
-        public double Debit(double walletAmount, double cost)
+        public void Debit(Player player, double walletAmount, double cost)
         {
             double result = walletAmount - cost;
-            return result;
+            result = player.PlayerWallet.Amount;
         }
     }
 }

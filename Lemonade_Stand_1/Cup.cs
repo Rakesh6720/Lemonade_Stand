@@ -9,9 +9,11 @@ namespace Lemonade_Stand_1
     class Cup : Supplies
     {
         double price;
+        string name;
         
-        public Cup()
+        public Cup(string name)
         {
+            this.name = name;
             this.price = 0.15;
         }
 
