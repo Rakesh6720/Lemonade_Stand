@@ -33,7 +33,11 @@ namespace Lemonade_Stand_1
             Console.WriteLine("How many {0} would you like to buy?", item);
             }
         }
-
+        public static void DisplayCost(Store store, double itemPrice, int numItems)
+        {
+            double result = store.CalculateCost(itemPrice, numItems);
+            Console.WriteLine("Cost: $ " + result);
+        }
         public static void DisplayPlayerWalletStatus(Player player)
         {
             Console.WriteLine("You have $" + player.PlayerWallet.Amount + "left in your treasury.");

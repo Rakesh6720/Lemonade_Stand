@@ -101,20 +101,36 @@ namespace Lemonade_Stand_1
             UserInterface.AskToBuy("cups");
             string numCupsString = Console.ReadLine();
             int numCups = Int32.Parse(numCupsString);
+            Cup cup = new Cup();
+            double numCupsCost = store1.CalculateCost(cup, numCups);
+            Console.WriteLine($"Cost of {numCups} cups: ${numCupsCost}");
+            double theoreticalCost = player1.PlayerWallet.Amount - numCups;
+            Console.WriteLine("Money remaining in your wallet: $" + theoreticalCost + ".");
+            Console.WriteLine("Would you like to confirm this purchase? Y/N");
+            string userInput = Console.ReadLine();
+            if (userInput == "y" || userInput == "Y")
+            {
+                Console.WriteLine($"{numCups} purchased.\n Money remaining in personal account: ${theoreticalCost}");
+                player1.PlayerWallet.Debit(player1, player1.PlayerWallet.Amount, numCupsCost);
+            }
 
             UserInterface.AskToBuy("lemons"); 
             string numLemonsString = Console.ReadLine();
             int numLemons = Int32.Parse(numLemonsString);
+            Lemon lemon = new Lemon();
+            double numLemonsCost = store1.CalculateCost(lemon, numLemons);
 
             UserInterface.AskToBuy("sugar");
-            
             string cupsSugarString = Console.ReadLine();
             int cupsSugar = Int32.Parse(cupsSugarString);
+            Sugar sugar = new Sugar();
+            double cupsSugarCost = store1.CalculateCost(sugar, cupsSugar);
 
             UserInterface.AskToBuy("ice");
-            
             string numIceString = Console.ReadLine();
             int numIce = Int32.Parse(numIceString);
+            Ice ice = new Ice();
+            double numIceCost = store1.CalculateCost(ice, numIce);
 
             //8.  Tally the total amount owed by the Player to the Store.
             double totalCheckOutPrice = store1.Checkout(numCups, numLemons, cupsSugar, numIce);
