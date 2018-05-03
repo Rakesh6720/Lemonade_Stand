@@ -26,7 +26,85 @@ namespace Lemonade_Stand_1
                 willBuy = value;
             }
         }
-        public bool DetermineIfCustomerBuy(Day day)
+
+        public int CalculateBuyingCustomers(Day day, List<Customer> Customers, double lemonadePrice)
+        {
+            int numberOfBuyingCustomers = 0;
+            foreach (Customer customer in Customers)
+            {
+                if (DetermineIfCustomerBuyWeather(day) == true && DetermineIfCustomerBuyPrice(day, lemonadePrice) == true)
+                {
+                    //customer.WillBuy = true;
+                    numberOfBuyingCustomers++;
+                    return numberOfBuyingCustomers;
+                }
+                else
+                {
+                    return numberOfBuyingCustomers;
+                }
+            }
+            return numberOfBuyingCustomers;
+        }
+
+        public bool DetermineIfCustomerBuyPrice(Day day, double lemonadePrice)
+        {
+            int probabilityOfBuying;
+            Random random = new Random();
+            if (lemonadePrice >= 2.49 && lemonadePrice <= 4.99)
+            {
+                probabilityOfBuying = random.Next(1, 10) * 10 / 100;
+                if (probabilityOfBuying > 39)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (lemonadePrice >= 5 && lemonadePrice <= 7.50)
+            {
+                probabilityOfBuying = random.Next(1, 10) * 10 / 100;
+                if (probabilityOfBuying > 79)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (lemonadePrice < 2.49 && lemonadePrice >= .75)
+            {
+                probabilityOfBuying = random.Next(1, 10) * 10 / 100;
+                if (probabilityOfBuying > 19)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (lemonadePrice < .75)
+            {
+                probabilityOfBuying = random.Next(1, 10) * 10 / 100;
+                if (probabilityOfBuying > 9)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool DetermineIfCustomerBuyWeather(Day day)
         {
             if (day.Weather.Temperature > 80 && day.Weather.IsSunny == true && day.Weather.IsRaining == false)
             {
@@ -40,7 +118,6 @@ namespace Lemonade_Stand_1
                 {
                     return false;
                 }
-
             }
             else if (day.Weather.Temperature > 80 && day.Weather.IsSunny == true && day.Weather.IsRaining == true)
             {
@@ -55,7 +132,7 @@ namespace Lemonade_Stand_1
                     return false;
                 }
             }
-            else if (day.Weather.Temperature<80 && day.Weather.IsSunny == true && day.Weather.IsRaining == false)
+            else if (day.Weather.Temperature < 80 && day.Weather.IsSunny == true && day.Weather.IsRaining == false)
             {
                 Random random = new Random();
                 int result = random.Next(1, 8) / 10 * 100;
@@ -73,20 +150,8 @@ namespace Lemonade_Stand_1
                 return false;
             }
         }
-        //    Random random = new Random();
-        //    int randomNum = random.Next(1, 11);
-        //    if (randomNum % 2 == 0)
-        //    {
-        //        this.willBuy = true;
-        //    }
-        //    else
-        //    {
-        //        this.willBuy = false;
-        //    }
-        //    return this.willBuy;
-        //}
 
-        public int DetermineNumCupsWillBuy(Customer customer)
+        public int DetermineNumCupsWillBuy(List<Customer> customers)
         {
             if (customer.willBuy == true)
             {
