@@ -14,6 +14,44 @@ namespace Lemonade_Stand_1
 
         //member methods
 
+        //1.  Ask the user how many players there will be.
+        public int GetNumOfPlayers()
+        {
+            Console.WriteLine("Please enter the number of players: ");
+            string userInput = Console.ReadLine();
+            try
+            {
+                int numOfPlayers = Int32.Parse(userInput);
+                return numOfPlayers;
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Please enter a valid number of players.  Press any key to try again...");
+                Console.ReadLine();
+                GetNumOfPlayers();
+                return 1;
+            }
+        }
+
+        //  Assume it is one player for now.
+        public void CreatePlayers(int numOfPlayers)
+        {
+            if (numOfPlayers == 1)
+            {
+                Console.WriteLine("Please enter the name of Player 1: ");
+                string userName = Console.ReadLine();
+                //create player wallet and player inventory objects
+                Wallet playerWallet = new Wallet();
+                
+                //2.  Create player1 and pass into player1 object the instance of playerWallet
+                player1 = new Player(userName, playerWallet);
+            }
+            else
+            {
+                Console.WriteLine("Haven't created multiplayer function yet");
+            }
+        }
+
         public int CalculatePayingCustomers(double lemonadePrice, Day day)
         {
             int numberOfBuyingCustomers = 0;
@@ -40,43 +78,7 @@ namespace Lemonade_Stand_1
 
         }
 
-        //1.  Ask the user how many players there will be.
-        public int GetNumOfPlayers()
-        {
-            Console.WriteLine("Please enter the number of players: ");
-            string userInput = Console.ReadLine();
-            try
-            { 
-            int numOfPlayers = Int32.Parse(userInput);
-            return numOfPlayers;
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Please enter a valid number of players.  Press any key to try again...");
-                Console.ReadLine();
-                GetNumOfPlayers();
-                return 1;
-            }
-        }
 
-        //  Assume it is one player for now.
-        public void CreatePlayers(int numOfPlayers)
-        {
-            if (numOfPlayers == 1)
-            {
-                Console.WriteLine("Please enter the name of Player 1: ");
-                string userName = Console.ReadLine();
-                //create player wallet and player inventory objects
-                Wallet playerWallet = new Wallet();
-                //List<Supplies> playerInventory = new List<Supplies>();
-                //2.  Create player1 and pass into player1 object the instance of playerWallet and playerInventory
-                player1 = new Player(userName, playerWallet);
-            }
-            else
-            {
-                Console.WriteLine("Haven't created multiplayer function yet");
-            }
-        }
 
         public void RunGame()
         {
@@ -91,10 +93,11 @@ namespace Lemonade_Stand_1
 
             //.  INSTANTIATE a STORE object that has an inventory object of supplies
             Supplies supplies = new Supplies();
-            List<Supplies> storeInventory = supplies.CreateInventory(0, 0, 0, 0);
-            Store store1 = new Store(storeInventory);
+           // List<Supplies> storeInventory = supplies.CreateInventory(0, 0, 0, 0);
+            Store store1 = new Store();
 
             //5.  Take the plalyer to the STORE.  
+            Console.WriteLine("Welcome to the Peabody General Store.  Today we have: ");
             //6.  Display to the player how much eat item costs.
             UserInterface.DisplayPrices();
 
@@ -104,9 +107,9 @@ namespace Lemonade_Stand_1
             string numCupsString = Console.ReadLine();
             int numCups = Int32.Parse(numCupsString);
             Cup cup = new Cup(supplyItem);
-            double numCupsCost = store1.CalculateCost(cup, numCups);
-            UserInterface.DisplayStoreTransaction(numCups, numCupsCost, player1);
-            UserInterface.DisplayConfirmation(numCups, numCupsCost, player1, supplyItem, store1);
+            double numCupsCost = store1.CalculateCost(cup.Price, numCups);
+            UserInterface.DisplayStoreTransaction(supplyItem, numCups, numCupsCost, player1.PlayerWallet);
+            UserInterface.DisplayConfirmation(numCups, numCupsCost, player1.PlayerWallet.Amount, supplyItem, store1, player1);
            
 
             UserInterface.AskToBuy("lemons");
@@ -114,27 +117,27 @@ namespace Lemonade_Stand_1
             string numLemonsString = Console.ReadLine();
             int numLemons = Int32.Parse(numLemonsString);
             Lemon lemon = new Lemon(supplyItem);
-            double numLemonsCost = store1.CalculateCost(lemon, numLemons);
-            UserInterface.DisplayStoreTransaction(numLemons, numLemonsCost, player1);
-            UserInterface.DisplayConfirmation(numLemons, numLemonsCost, player1, supplyItem, store1);
+            double numLemonsCost = store1.CalculateCost(lemon.Price, numLemons);
+            UserInterface.DisplayStoreTransaction(supplyItem, numLemons, numLemonsCost, player1.PlayerWallet);
+            UserInterface.DisplayConfirmation(numLemons, numLemonsCost, player1.PlayerWallet.Amount, supplyItem, store1, player1);
 
             UserInterface.AskToBuy("sugar");
             supplyItem = "sugar";
             string cupsSugarString = Console.ReadLine();
             int cupsSugar = Int32.Parse(cupsSugarString);
             Sugar sugar = new Sugar(supplyItem);
-            double cupsSugarCost = store1.CalculateCost(sugar, cupsSugar);
-            UserInterface.DisplayStoreTransaction(cupsSugar, cupsSugarCost, player1);
-            UserInterface.DisplayConfirmation(cupsSugar, cupsSugarCost, player1, supplyItem, store1);
+            double cupsSugarCost = store1.CalculateCost(sugar.Price, cupsSugar);
+            UserInterface.DisplayStoreTransaction(supplyItem, cupsSugar, cupsSugarCost, player1.PlayerWallet);
+            UserInterface.DisplayConfirmation(cupsSugar, cupsSugarCost, player1.PlayerWallet.Amount, supplyItem, store1, player1);
 
             UserInterface.AskToBuy("ice");
             supplyItem = "ice";
             string numIceString = Console.ReadLine();
             int numIce = Int32.Parse(numIceString);
             Ice ice = new Ice(supplyItem);
-            double numIceCost = store1.CalculateCost(ice, numIce);
-            UserInterface.DisplayStoreTransaction(numIce, numIceCost, player1);
-            UserInterface.DisplayConfirmation(numIce, numIceCost, player1, supplyItem, store1);
+            double numIceCost = store1.CalculateCost(ice.Price, numIce);
+            UserInterface.DisplayStoreTransaction(supplyItem, numIce, numIceCost, player1.PlayerWallet);
+            UserInterface.DisplayConfirmation(numIce, numIceCost, player1.PlayerWallet.Amount, supplyItem, store1, player1);
 
             //8.  Tally the total amount owed by the Player to the Store.
             double totalCheckOutPrice = store1.Checkout(numCups, numLemons, cupsSugar, numIce);
@@ -145,7 +148,7 @@ namespace Lemonade_Stand_1
             //9.  Subtract the total amount owed from the Player Wallet.  
             try
             { 
-            player1.PlayerWallet.Debit(player1, player1.PlayerWallet.Amount, totalCheckOutPrice);
+            player1.PlayerWallet.Debit(player1.PlayerWallet, totalCheckOutPrice);
             }
             catch (Exception)
             {

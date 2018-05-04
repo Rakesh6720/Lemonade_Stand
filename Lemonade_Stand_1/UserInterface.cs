@@ -22,24 +22,24 @@ namespace Lemonade_Stand_1
         {
             if (item == "sugar")
             {
-                Console.WriteLine("How many cups of {0} would you like to buy (4 cups per pound)?", item);
+                Console.WriteLine($"How many cups of {item} would you like to buy (4 cups per pound)?");
             }
             else if (item == "ice")
             {
-                Console.WriteLine("How many pounds of {0} would you like to buy?", item);
+                Console.WriteLine($"How many pounds of {item} would you like to buy?");
             }
             else
             {
-                Console.WriteLine("How many {0} would you like to buy?", item);
+                Console.WriteLine($"How many {item} would you like to buy?");
             }
         }
-        public static void DisplayStoreTransaction(int numCups, double numCupsCost, Player player)
+        public static void DisplayStoreTransaction(string item, int numItems, double numItemsCost, Wallet playerWallet)
           {
-            Console.WriteLine($"Cost of {numCups} cups: ${numCupsCost}");
-            double theoreticalCost = player.PlayerWallet.Amount - numCups;
-            Console.WriteLine("Money remaining in your wallet: $" + theoreticalCost + ".");
+            Console.WriteLine($"Cost of {numItems} {item}: ${numItemsCost}");
+            playerWallet.Amount -= numItemsCost;
+            Console.WriteLine("Money remaining in your wallet: $" + playerWallet.Amount + ".");
           }
-        public static void DisplayConfirmation(int numItems, double costItems, Player player, string item, Store store)
+        public static void DisplayConfirmation(int numItems, double costItems, double playerWalletAmount, string item, Store store, Player player)
         {
             Console.WriteLine("Would you like to confirm this purchase? Y/N");
             string userInput = Console.ReadLine();
@@ -54,7 +54,7 @@ namespace Lemonade_Stand_1
             else
             {
                 Console.WriteLine("Please enter a valid respone: Y/N");
-                DisplayConfirmation(numItems, costItems, player, item, store);
+                DisplayConfirmation(numItems, costItems, player.PlayerWallet.Amount, item, store, player);
             }
         }
     public static void DisplayPlayerWalletStatus(Player player)
