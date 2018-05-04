@@ -15,7 +15,7 @@ namespace Lemonade_Stand_1
         public Weather()
         {
             Random random = new Random();
-            this.temperature = random.Next(50, 120);
+            this.temperature = random.Next(-23, 120);
             if (random.Next(1, 101) % 2 == 0)
             {
                 this.isSunny = true;

@@ -17,7 +17,7 @@ namespace Lemonade_Stand_1
         //1.  Ask the user how many players there will be.
         public int GetNumOfPlayers()
         {
-            Console.WriteLine("Please enter the number of players: ");
+            UserInterface.Display("Please enter the number of players: ");
             string userInput = Console.ReadLine();
             try
             {
@@ -26,7 +26,7 @@ namespace Lemonade_Stand_1
             }
             catch (FormatException)
             {
-                Console.WriteLine("Please enter a valid number of players.  Press any key to try again...");
+                UserInterface.Display("Please enter a valid number of players.  Press any key to try again...");
                 Console.ReadLine();
                 GetNumOfPlayers();
                 return 1;
@@ -38,18 +38,32 @@ namespace Lemonade_Stand_1
         {
             if (numOfPlayers == 1)
             {
-                Console.WriteLine("Please enter the name of Player 1: ");
+                UserInterface.Display("Please enter the name of Player 1: ");
                 string userName = Console.ReadLine();
-                //create player wallet and player inventory objects
+                //create player wallet
                 Wallet playerWallet = new Wallet();
-                
                 //2.  Create player1 and pass into player1 object the instance of playerWallet
                 player1 = new Player(userName, playerWallet);
             }
             else
             {
-                Console.WriteLine("Haven't created multiplayer function yet");
+                UserInterface.Display("Haven't created multiplayer function yet");
             }
+        }
+
+        
+
+
+        public List<Day> CreateGameDayList(int numDays)
+        {
+            
+            List<Day> gameDays = new List<Day>();
+            for (int i = 0; i <= numDays; i++)
+            {
+                Day day = new Day();
+                gameDays.Add(day);
+            }
+            return gameDays;
         }
 
         public int CalculatePayingCustomers(double lemonadePrice, Day day)
@@ -78,15 +92,32 @@ namespace Lemonade_Stand_1
 
         }
 
+        public void CreateWeatherReport(int numDays, List<Day> gameDays)
+        {
+            for(int i = 0; i<numDays; i++)
+            {
+                Weather weather = new Weather();
+                gameDays[i].Weather = weather;
+            }
+            
+        }
 
 
         public void RunGame()
         {
             int numPlayers = GetNumOfPlayers();
             CreatePlayers(numPlayers);
+            // GET NUMBER OF DAYS FROM PLAYER
+            int numDays = UserInterface.GetNumGameDays();
+            List<Day> gameDays = CreateGameDayList(numDays);
+            UserInterface.DisplayWeatherDay(gameDays[0]);
 
-            //.  Instantiate a DAY object
-            Day day1 = new Day();
+           
+            }
+            
+
+
+            
 
             //4.  Give the player the forecast for the current day.
             UserInterface.DisplayWeather(day1);

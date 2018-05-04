@@ -8,6 +8,19 @@ namespace Lemonade_Stand_1
 {
     public static class UserInterface
     {
+        public static void Display(string phrase)
+        {
+            Console.WriteLine(phrase);
+        }
+
+        public static int GetNumGameDays()
+        {
+            UserInterface.Display("How long would you like to play for?\n1) 7 days\n2) 14 days\n 3) 21 days\n");
+            string userInput = Console.ReadLine();
+            int numDays = Int32.Parse(userInput);
+            //INSERT A VALIDATION METHOD HERE
+            return numDays;
+        }
         public static void DisplayPrices()
         {
             Cup cup = new Cup("cup");
@@ -89,36 +102,45 @@ namespace Lemonade_Stand_1
         }
 
         public static void AskForLemonadePrice()
-        { 
-            Console.WriteLine("Enter the price of each cup of lemonade: ");
-        }
-
-        public static void DisplayWeather(Day day1)
         {
-            if (day1.Weather.IsSunny == true && day1.Weather.IsRaining == true)
+            Console.WriteLine("Enter the price of each cup of lemonade: ");
+        };
+        public static void DisplayForecast(int numDays, List<Day> gameDays)
+                {
+            for(int i=0; i<=numDays; i++)
+            {
+                Display($"Weather for day {i}\n");
+                DisplayWeatherDay(gameDays[i]);
+                Display("\n");
+            }
+                
+                }
+        public static void DisplayWeatherDay(Day day)
+        {
+            if (day.Weather.IsSunny == true && day.Weather.IsRaining == true)
             {
                 string sunny = "sunny";
                 string rainy = "rainy";
-                Console.WriteLine("The forecast for today is: " + day1.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
+                Console.WriteLine("The forecast for today is: " + day.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
             }
-            else if (day1.Weather.IsSunny == false && day1.Weather.IsRaining == true)
+            else if (day.Weather.IsSunny == false && day.Weather.IsRaining == true)
             {
                 string sunny = "cloudy";
                 string rainy = "rainy";
-                Console.WriteLine("The forecast for today is: " + day1.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
+                Console.WriteLine("The forecast for today is: " + day.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
             }
 
-            else if (day1.Weather.IsSunny == false && day1.Weather.IsRaining == false)
+            else if (day.Weather.IsSunny == false && day.Weather.IsRaining == false)
             {
                 string sunny = "cloudy";
                 string rainy = "clear";
-                Console.WriteLine("The forecast for today is: " + day1.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
+                Console.WriteLine("The forecast for today is: " + day.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
             }
             else
             {
                 string sunny = "sunny";
                 string rainy = "clear";
-                Console.WriteLine("The forecast for today is: " + day1.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
+                Console.WriteLine("The forecast for today is: " + day.Weather.Temperature + ", " + sunny + " and " + rainy + ".");
             }
             
         }
