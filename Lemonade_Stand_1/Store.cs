@@ -8,11 +8,29 @@ namespace Lemonade_Stand_1
 {
    public class Store
     {
-        //List<Supplies> inventory;
+        List<Supplies>inventory;
 
         public Store()
         {
-
+            inventory = new List<Supplies>();
+            for (int i=0; 0<=3; i++)
+            {
+                inventory.Add(new Cup("Cup"));
+                inventory.Add(new Lemon("lemon"));
+                inventory.Add(new Sugar("sugar"));
+                inventory.Add(new Ice("ice"));
+            }
+        }
+        public List<Supplies> Inventory
+        {
+            get
+            {
+                return inventory;
+            }
+            set
+            {
+                inventory = value;
+            }
         }
 
         public void ExecutePurchase(int numItems, double costItems, Player player)

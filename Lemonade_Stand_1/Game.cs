@@ -110,17 +110,19 @@ namespace Lemonade_Stand_1
             // GET NUMBER OF DAYS FROM PLAYER
             int numDays = UserInterface.GetNumGameDays();
             List<Day> gameDays = CreateGameDayList(numDays);
-            UserInterface.DisplayWeatherDay(gameDays[0]);
+            UserInterface.DisplayWeatherDay(gameDays[0]); // Give the player the weather for the day
+            UserInterface.DisplayForecast(numDays, gameDays); //Give the player the forecast for the coming week
+            UserInterface.Display("Welcome to the Peabody General Store!")
 
-           
-            }
+
+        }
             
 
 
             
 
-            //4.  Give the player the forecast for the current day.
-            UserInterface.DisplayWeather(day1);
+            
+            
 
             //.  INSTANTIATE a STORE object that has an inventory object of supplies
             Supplies supplies = new Supplies();

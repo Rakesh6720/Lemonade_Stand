@@ -21,14 +21,12 @@ namespace Lemonade_Stand_1
             //INSERT A VALIDATION METHOD HERE
             return numDays;
         }
-        public static void DisplayPrices()
+        public static void DisplayInventoryPrices(List<Supplies> inventory)
         {
-            Cup cup = new Cup("cup");
-            Lemon lemon = new Lemon("lemon");
-            Sugar sugar = new Sugar("sugar");
-            Ice ice = new Ice("ice");
-
-            Console.WriteLine("The prices of each item are:\nCups -- " + cup.Price + "\nLemons -- " + lemon.Price + "\nSugar -- " + sugar.Price + " per cup\nIce -- " + ice.Price + " per pound");
+            Display($"The prices of each item are:\nCups -- ${inventory[0].Price} per cup.");
+            Display($"\nLemons -- ${inventory[1].Price} per lemon.");
+            Display($"Sugar -- ${inventory[2].Price} per pound of sugar (2 cups/pound).");
+            Display($"Ice -- {inventory[3].Price} per pound of ice (20 cups/pound.)");
         }
 
         public static void AskToBuy(string item)
@@ -104,17 +102,33 @@ namespace Lemonade_Stand_1
         public static void AskForLemonadePrice()
         {
             Console.WriteLine("Enter the price of each cup of lemonade: ");
-        };
+        }
         public static void DisplayForecast(int numDays, List<Day> gameDays)
-                {
-            for(int i=0; i<=numDays; i++)
+        {
+            Display("Would you like to see the forecast for the coming week?\n1) YES\n2) NO\n");
+            string userInput = Console.ReadLine();
+            if (userInput == "1")
             {
-                Display($"Weather for day {i}\n");
-                DisplayWeatherDay(gameDays[i]);
-                Display("\n");
-            }
-                
+                for (int i = 0; i <= 6; i++)
+                {
+                    Display($"Weather for day {i}\n");
+                    DisplayWeatherDay(gameDays[i]);
+                    Display("\n");
                 }
+            }
+            else if (userInput == "2")
+            {
+                return;
+            }
+            else
+            {
+                Display($"''{userInput}'' is not a valid respone.");
+                DisplayForecast(numDays, gameDays);
+            }
+
+            
+                
+         }
         public static void DisplayWeatherDay(Day day)
         {
             if (day.Weather.IsSunny == true && day.Weather.IsRaining == true)
