@@ -36,8 +36,8 @@ namespace Lemonade_Stand_1
         public static void DisplayStoreTransaction(string item, int numItems, double numItemsCost, Wallet playerWallet)
           {
             Console.WriteLine($"Cost of {numItems} {item}: ${numItemsCost}");
-            playerWallet.Amount -= numItemsCost;
-            Console.WriteLine("Money remaining in your wallet: $" + playerWallet.Amount + ".");
+            double theoreticalAmount = playerWallet.Amount - numItemsCost;
+            Console.WriteLine("Money remaining in your wallet: $" + theoreticalAmount + ".");
           }
         public static void DisplayConfirmation(int numItems, double costItems, double playerWalletAmount, string item, Store store, Player player)
         {

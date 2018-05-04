@@ -17,7 +17,7 @@ namespace Lemonade_Stand_1
 
         public void ExecutePurchase(int numItems, double costItems, Player player)
         {
-            player.PlayerWallet.Amount -= costItems;
+            //player.PlayerWallet.Amount -= costItems;
             Console.WriteLine($"{numItems} purchased.\n Money remaining in personal account: ${player.PlayerWallet.Amount}.");
             player.PlayerWallet.Debit(player.PlayerWallet, costItems);
         }
