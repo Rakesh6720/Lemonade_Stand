@@ -13,9 +13,9 @@ namespace Lemonade_Stand_1
         public Store()
         {
             inventory = new List<Supplies>();
-            for (int i=0; 0<=3; i++)
+            for (int i=0; i<=3; i++)
             {
-                inventory.Add(new Cup("Cup"));
+                inventory.Add(new Cup("cup"));
                 inventory.Add(new Lemon("lemon"));
                 inventory.Add(new Sugar("sugar"));
                 inventory.Add(new Ice("ice"));

@@ -41,22 +41,22 @@ namespace Lemonade_Stand_1
             }
             else
             {
-                Console.WriteLine($"How many {item} would you like to buy?");
+                Console.WriteLine($"How many {item}s would you like to buy?");
             }
         }
-        public static void DisplayStoreTransaction(string item, int numItems, double numItemsCost, Wallet playerWallet)
+        public static void DisplayTransaction(string item, int numItem, double numItemCost, Wallet playerWallet)
           {
-            Console.WriteLine($"Cost of {numItems} {item}: ${numItemsCost}");
-            double theoreticalAmount = playerWallet.Amount - numItemsCost;
-            Console.WriteLine("Money remaining in your wallet: $" + theoreticalAmount + ".");
+            Console.WriteLine($"Cost of {numItem} {item}: ${numItemCost}");
+            double theoreticalAmount = playerWallet.Amount - numItemCost;
+            Console.WriteLine("Money remaining in your wallet would be: $" + theoreticalAmount + ".");
           }
-        public static void DisplayConfirmation(int numItems, double costItems, double playerWalletAmount, string item, Store store, Player player)
+        public static void ConfirmPurchase(int numItem, double costItem, double playerWalletAmount, string item, Store store, Player player)
         {
             Console.WriteLine("Would you like to confirm this purchase? Y/N");
             string userInput = Console.ReadLine();
             if (userInput == "y" || userInput == "Y")
             {
-                store.ExecutePurchase(numItems, costItems, player);
+                store.ExecutePurchase(numItem, costItem, player);
             }
             else if (userInput == "n" || userInput == "N")
             {
@@ -65,7 +65,7 @@ namespace Lemonade_Stand_1
             else
             {
                 Console.WriteLine("Please enter a valid respone: Y/N");
-                DisplayConfirmation(numItems, costItems, player.PlayerWallet.Amount, item, store, player);
+                ConfirmPurchase(numItem, costItem, player.PlayerWallet.Amount, item, store, player);
             }
         }
     public static void DisplayPlayerWalletStatus(Player player)

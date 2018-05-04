@@ -107,42 +107,68 @@ namespace Lemonade_Stand_1
         {
             int numPlayers = GetNumOfPlayers();
             CreatePlayers(numPlayers);
-            // GET NUMBER OF DAYS FROM PLAYER
-            int numDays = UserInterface.GetNumGameDays();
+            int numDays = UserInterface.GetNumGameDays(); //Get number of days from player
             List<Day> gameDays = CreateGameDayList(numDays);
             UserInterface.DisplayWeatherDay(gameDays[0]); // Give the player the weather for the day
             UserInterface.DisplayForecast(numDays, gameDays); //Give the player the forecast for the coming week
-            UserInterface.Display("Welcome to the Peabody General Store!")
+            UserInterface.Display("Welcome to the Peabody General Store!"); // Welcome the playe to the store
+            Store store1 = new Store(); // instantiate a new store with its own inventory
+            UserInterface.DisplayInventoryPrices(store1.Inventory);
 
-
+            UserInterface.AskToBuy(store1.Inventory[0].Name);
+            string numString = Console.ReadLine();
+            int numItem = Int32.Parse(numString);
+            double numItemCost = store1.CalculateCost(store1.Inventory[0].Price, numItem);
+            UserInterface.DisplayTransaction(store1.Inventory[0].Name, numItem, numItemCost, player1.PlayerWallet);
+            UserInterface.ConfirmPurchase(numItem, numItemCost, player1.PlayerWallet.Amount, store1.Inventory[0].Name, store1, player1);
         }
+        public void GoShopping(List<Supplies> inventory, Store store1, Player player1)
+        {
+            foreach (Supplies item in inventory)
+            {
+                UserInterface.AskToBuy(item.Name);
+                string numString = Console.ReadLine();
+                int numItem = Int32.Parse(numString);
+                double numItemCost = store1.CalculateCost(store1.Inventory[0].Price, numItem);
+                UserInterface.DisplayTransaction(store1.Inventory[0].Name, numItem, numItemCost, player1.PlayerWallet);
+                UserInterface.ConfirmPurchase(numItem, numItemCost, player1.PlayerWallet.Amount, store1.Inventory[0].Name, store1, player1);
+                double runningTotal = 0;
+                runningTotal += item.Price;
+            }
+
+            //START HERE AFTER MAY 4 DOGGY!!!
+            double totalCheckOutPrice = store1.Checkout(numCups, numLemons, cupsSugar, numIce);
+
+            //DISPLAY total check out price
+            UserInterface.DisplayCheckoutPrice(totalCheckOutPrice);
+
+            //9.  Subtract the total amount owed from the Player Wallet.  
+            try
+            {
+                player1.PlayerWallet.Debit(player1.PlayerWallet, totalCheckOutPrice);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("You ran out of money!\nGAME OVER!");
+                Console.ReadLine();
+            }
+
+            //DISPLAY the player's wallet status
+            UserInterface.DisplayPlayerWalletStatus(player1);
+
+            //10.  MOVE the items FROM the STORE INVENTORY OBJECT to the PLAYER INVENTORY OBJECT
+            //create player method that updates player inventory
+            List<Supplies> playerInventory = supplies.CreateInventory(numCups, numLemons, numIce, cupsSugar);
+            player1.PlayerInventory = playerInventory;
+        }
+
+        
             
 
 
             
-
-            
-            
-
-            //.  INSTANTIATE a STORE object that has an inventory object of supplies
-            Supplies supplies = new Supplies();
-           // List<Supplies> storeInventory = supplies.CreateInventory(0, 0, 0, 0);
-            Store store1 = new Store();
-
-            //5.  Take the plalyer to the STORE.  
-            Console.WriteLine("Welcome to the Peabody General Store.  Today we have: ");
-            //6.  Display to the player how much eat item costs.
-            UserInterface.DisplayPrices();
-
-            //7.  Ask the player how many of each item they would like to buy.
-            UserInterface.AskToBuy("cups");
-            string supplyItem = "cups";
-            string numCupsString = Console.ReadLine();
-            int numCups = Int32.Parse(numCupsString);
-            Cup cup = new Cup(supplyItem);
-            double numCupsCost = store1.CalculateCost(cup.Price, numCups);
-            UserInterface.DisplayStoreTransaction(supplyItem, numCups, numCupsCost, player1.PlayerWallet);
-            UserInterface.DisplayConfirmation(numCups, numCupsCost, player1.PlayerWallet.Amount, supplyItem, store1, player1);
+     
+        
            
 
             UserInterface.AskToBuy("lemons");
@@ -173,29 +199,7 @@ namespace Lemonade_Stand_1
             UserInterface.DisplayConfirmation(numIce, numIceCost, player1.PlayerWallet.Amount, supplyItem, store1, player1);
 
             //8.  Tally the total amount owed by the Player to the Store.
-            double totalCheckOutPrice = store1.Checkout(numCups, numLemons, cupsSugar, numIce);
 
-            //DISPLAY total check out price
-            UserInterface.DisplayCheckoutPrice(totalCheckOutPrice);
-
-            //9.  Subtract the total amount owed from the Player Wallet.  
-            try
-            { 
-            player1.PlayerWallet.Debit(player1.PlayerWallet, totalCheckOutPrice);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("You ran out of money!\nGAME OVER!");
-                Console.ReadLine();
-            }
-
-            //DISPLAY the player's wallet status
-            UserInterface.DisplayPlayerWalletStatus(player1);
-
-            //10.  MOVE the items FROM the STORE INVENTORY OBJECT to the PLAYER INVENTORY OBJECT
-            //create player method that updates player inventory
-            List<Supplies> playerInventory = supplies.CreateInventory(numCups, numLemons, numIce, cupsSugar);
-            player1.PlayerInventory = playerInventory;
 
             //.  INSTANTIATE a STAND object and CREATE its own INVENTORY object
             Inventory standInventory = new Inventory();
