@@ -43,9 +43,16 @@ namespace Lemonade_Stand_1
             }
         }
 
-        public void GoShopping(List<Supplies> inventory, Store store1, Player player1)
+        public void GoShopping(Store store1, Player player1)
         {
             double runningTotal = 0;
+            List<Supplies> inventory = new List<Supplies>();
+            inventory.Add(new Cup());
+            inventory.Add(new Lemon());
+            inventory.Add(new Sugar());
+            inventory.Add(new Ice());
+            List<Supplies> playerInventory = new List<Supplies>();
+            playerInventory = player1.playerInventory;
 
             foreach (Supplies item in inventory)
             {

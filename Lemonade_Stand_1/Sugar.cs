@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    class Sugar : Supplies
+    public class Sugar : Supplies
     {
         string name;
         double price; //price per a cup?

@@ -8,27 +8,20 @@ namespace Lemonade_Stand_1
 {
    public class Store
     {
-       Inventory inventory;
+        Cup cup;
+        Lemon lemon;
+        Sugar sugar;
+        Ice ice;
 
         public Store()
         {
-            
-            //for (int i=0; i<=3; i++)
-            //{ 
-                //Cup cup = new Cup();
-                //inventory.Add(cup);
-
-                //Lemon lemon = new Lemon();
-                //inventory.Add(lemon);
-
-                //Sugar sugar = new Sugar();
-                //inventory.Add(sugar);
-
-                //Ice ice = new Ice();
-                //inventory.Add(ice);
-            //}
+            Cup cup = new Cup();
+            Lemon lemon = new Lemon();
+            Sugar sugar = new Sugar();
+            Ice ice = new Ice();
         }
-        public Inventory Inventory
+     
+        public List<Supplies> Inventory
         {
             get
             {

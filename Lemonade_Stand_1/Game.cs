@@ -117,9 +117,9 @@ namespace Lemonade_Stand_1
             UserInterface.DisplayForecast(numDays, gameDays); //Give the player the forecast for the coming week
             UserInterface.Display("Welcome to the Peabody General Store!"); // Welcome the playe to the store
             Store store1 = new Store(); // instantiate a new store with its own inventory
-            store1.Inventory = new Inventory();
-            UserInterface.DisplayInventoryPrices(store1.Inventory);
-            player1.GoShopping(store1.Inventory, store1, player1);
+          
+            
+            player1.GoShopping(store1, player1);
 
 
             //UserInterface.AskToBuy(store1.Inventory[0].Name);
@@ -186,7 +186,7 @@ namespace Lemonade_Stand_1
 
 
             //.  INSTANTIATE a STAND object and CREATE its own INVENTORY object
-            Inventory standInventory = new Inventory();
+            
 
             //standInventory = standInventory.CreateInventory(standInventory, numCups, numLemons, numIce, cupsSugar);
             Stand stand = new Stand();

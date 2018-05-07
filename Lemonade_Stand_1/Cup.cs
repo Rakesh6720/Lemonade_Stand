@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    class Cup : Supplies
+   public  class Cup : Supplies
     {
         double price;
         string name;

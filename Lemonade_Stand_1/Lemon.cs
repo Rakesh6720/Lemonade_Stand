@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lemonade_Stand_1
 {
-    class Lemon : Fruits
+    public class Lemon : Supplies
     {
         string name;
         double price;
@@ -30,6 +30,18 @@ namespace Lemonade_Stand_1
             set
             {
                 price = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
             }
         }
 

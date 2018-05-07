@@ -10,6 +10,7 @@ namespace Lemonade_Stand_1
     {
         string name;
         double price;
+        
         //int amount;
 
         public Supplies()
@@ -49,8 +50,8 @@ namespace Lemonade_Stand_1
             }
             for (int i = 0; i < numLemons; i++)
             {
-                Lemon lemon = new Lemon();
-                suppliesList.Add(lemon);
+                //Lemon lemon = new Lemon();
+                //suppliesList.Add(lemon);
             }
             for (int i = 0; i < poundsIce; i++)
             {

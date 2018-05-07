@@ -39,29 +39,7 @@ namespace Lemonade_Stand_1
                 GetNumGameDays();
                 return 0;
             }
-        }
-        public static void DisplayInventoryPrices(Inventory inventory)
-        {
-            Display("The prices for each item are:");
-            //foreach(Supplies item in inventory)
-            //{
-            //    if (item.Name == "sugar")
-            //    {
-            //        Display($"Sugar -- ${item.Price} per pound (2 cups/pound).");
-            //    }
-            //    else if (item.Name == "ice")
-            //    {
-            //        Display($"Ice -- ${item.Price} per pound (20 cups/pound).");
-            //    }
-            //    else
-            //    {
-            //        Display($"{item.Name} -- ${item.Price} per {item.Name}.");
-            //    }
-            //}
-            Display($"The prices of each item are:\nCups -- ${inventory.cup.Price} per cup.");
-            Display($"\nLemons -- ${inventory.lemon.Price} per lemon.");
-            Display($"Sugar -- ${inventory.sugar.Price} per pound of sugar (2 cups/pound).");
-            Display($"Ice -- {inventory.ice.Price} per pound of ice (20 cups/pound.)");
+        
         }
 
         public static void AskToBuy(string item)
