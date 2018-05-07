@@ -11,9 +11,9 @@ namespace Lemonade_Stand_1
         string name;
         double price; //price per a cup?
 
-        public Sugar(string name)
+        public Sugar()
         {
-            this.name = name;
+            this.name = "sugar";
             this.price = .25;
         }
         
@@ -26,6 +26,18 @@ namespace Lemonade_Stand_1
             set
             {
                 price = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
             }
         }
         

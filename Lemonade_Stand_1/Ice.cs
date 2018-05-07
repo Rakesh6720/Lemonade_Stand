@@ -12,9 +12,9 @@ namespace Lemonade_Stand_1
         double price;
         int decayValue;
 
-        public Ice(string name)
+        public Ice()
         {
-            this.name = name;
+            this.name = "ice";
             this.price = 0.10; // cost per pound
             this.decayValue = 1; //ice will only last one day
         }
@@ -31,6 +31,17 @@ namespace Lemonade_Stand_1
             }
         }
 
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+            }
+        }
         public int DecayValue
         {
             get

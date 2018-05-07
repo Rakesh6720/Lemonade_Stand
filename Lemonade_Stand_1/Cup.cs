@@ -11,9 +11,9 @@ namespace Lemonade_Stand_1
         double price;
         string name;
         
-        public Cup(string name)
+        public Cup()
         {
-            this.name = name;
+            this.name = "cup";
             this.price = 0.15;
         }
 
@@ -26,6 +26,18 @@ namespace Lemonade_Stand_1
             set
             {
                 price = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
             }
         }
     }

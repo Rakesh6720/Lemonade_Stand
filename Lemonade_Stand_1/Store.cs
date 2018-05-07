@@ -8,20 +8,27 @@ namespace Lemonade_Stand_1
 {
    public class Store
     {
-        List<Supplies>inventory;
+       Inventory inventory;
 
         public Store()
         {
-            inventory = new List<Supplies>();
-            for (int i=0; i<=3; i++)
-            {
-                inventory.Add(new Cup("cup"));
-                inventory.Add(new Lemon("lemon"));
-                inventory.Add(new Sugar("sugar"));
-                inventory.Add(new Ice("ice"));
-            }
+            
+            //for (int i=0; i<=3; i++)
+            //{ 
+                //Cup cup = new Cup();
+                //inventory.Add(cup);
+
+                //Lemon lemon = new Lemon();
+                //inventory.Add(lemon);
+
+                //Sugar sugar = new Sugar();
+                //inventory.Add(sugar);
+
+                //Ice ice = new Ice();
+                //inventory.Add(ice);
+            //}
         }
-        public List<Supplies> Inventory
+        public Inventory Inventory
         {
             get
             {
@@ -50,10 +57,10 @@ namespace Lemonade_Stand_1
 
         public double Checkout(int numCups, int numLemons, int cupsSugar, int numIce)
         {
-            Cup cup = new Cup("cup");
-            Lemon lemon = new Lemon("lemon");
-            Sugar sugar = new Sugar("sugar");
-            Ice ice = new Ice("ice");
+            Cup cup = new Cup();
+            Lemon lemon = new Lemon();
+            Sugar sugar = new Sugar();
+            Ice ice = new Ice();
 
             double result = (numCups * cup.Price) + (numLemons * lemon.Price) + (cupsSugar * sugar.Price) + (numIce * ice.Price);
             return result;

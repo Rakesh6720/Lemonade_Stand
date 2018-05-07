@@ -44,22 +44,22 @@ namespace Lemonade_Stand_1
             List<Supplies> suppliesList = new List<Supplies>();
             for (int i = 0; i < numCups; i++)
             {
-                Cup cup = new Cup("cup");
+                Cup cup = new Cup();
                 suppliesList.Add(cup);
             }
             for (int i = 0; i < numLemons; i++)
             {
-                Lemon lemon = new Lemon("lemon");
+                Lemon lemon = new Lemon();
                 suppliesList.Add(lemon);
             }
             for (int i = 0; i < poundsIce; i++)
             {
-                Ice ice = new Ice("ice");
+                Ice ice = new Ice();
                 suppliesList.Add(ice);
             }
             for (int i = 0; i < cupsSugar; i++)
             {
-                Sugar sugar = new Sugar("sugar");
+                Sugar sugar = new Sugar();
                 suppliesList.Add(sugar);
             }
             return suppliesList;

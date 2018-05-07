@@ -14,9 +14,9 @@ namespace Lemonade_Stand_1
         int decayValue; 
 
 
-        public Lemon(string name)
+        public Lemon()
         {
-            this.name = name;
+            this.name = "lemon";
             this.price = 0.25;
             this.decayValue = 3; //this indicates that lemons spoil after 3 days
         }

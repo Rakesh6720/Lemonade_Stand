@@ -18,15 +18,50 @@ namespace Lemonade_Stand_1
             UserInterface.Display("How long would you like to play for?\n1) 7 days\n2) 14 days\n 3) 21 days\n");
             string userInput = Console.ReadLine();
             int numDays = Int32.Parse(userInput);
-            //INSERT A VALIDATION METHOD HERE
-            return numDays;
+            if (numDays == 1 || numDays == 7)
+            {
+                numDays = 7;
+                return numDays;
+            }
+            else if (numDays == 2 || numDays == 14)
+            {
+                numDays = 14;
+                return numDays;
+            }
+            else if (numDays == 3 || numDays == 21)
+            {
+                numDays = 21;
+                return numDays;
+            }
+            else
+            {
+                UserInterface.Display("Please enter a valid number.");
+                GetNumGameDays();
+                return 0;
+            }
         }
-        public static void DisplayInventoryPrices(List<Supplies> inventory)
+        public static void DisplayInventoryPrices(Inventory inventory)
         {
-            Display($"The prices of each item are:\nCups -- ${inventory[0].Price} per cup.");
-            Display($"\nLemons -- ${inventory[1].Price} per lemon.");
-            Display($"Sugar -- ${inventory[2].Price} per pound of sugar (2 cups/pound).");
-            Display($"Ice -- {inventory[3].Price} per pound of ice (20 cups/pound.)");
+            Display("The prices for each item are:");
+            //foreach(Supplies item in inventory)
+            //{
+            //    if (item.Name == "sugar")
+            //    {
+            //        Display($"Sugar -- ${item.Price} per pound (2 cups/pound).");
+            //    }
+            //    else if (item.Name == "ice")
+            //    {
+            //        Display($"Ice -- ${item.Price} per pound (20 cups/pound).");
+            //    }
+            //    else
+            //    {
+            //        Display($"{item.Name} -- ${item.Price} per {item.Name}.");
+            //    }
+            //}
+            Display($"The prices of each item are:\nCups -- ${inventory.cup.Price} per cup.");
+            Display($"\nLemons -- ${inventory.lemon.Price} per lemon.");
+            Display($"Sugar -- ${inventory.sugar.Price} per pound of sugar (2 cups/pound).");
+            Display($"Ice -- {inventory.ice.Price} per pound of ice (20 cups/pound.)");
         }
 
         public static void AskToBuy(string item)
@@ -78,24 +113,24 @@ namespace Lemonade_Stand_1
             Console.WriteLine("Your total bill is: $" + checkoutPrice);
         }
 
-        public static void AskNumberGallons()
-        {
-            Console.WriteLine("How many gallons of lemonade would you like to make today?  (1 gallon = 16 cups)");
-        }
+        //public static void AskNumberGallons()
+        //{
+        //    Console.WriteLine("How many gallons of lemonade would you like to make today?  (1 gallon = 16 cups)");
+        //}
 
-        public static void AskNumberToUse(string ingredients)
+        public static void AskNumberToUse(string ingredient)
         {
-            if (ingredients == "sugar")
+            if (ingredient == "sugar")
             {
                 Console.WriteLine("How many cups of sugar would you like to use?");
             }
-            else if (ingredients == "ice")
+            else if (ingredient == "ice")
             {
                 Console.WriteLine("How many pounds of ice would you like to use?");
             }
             else
             { 
-            Console.WriteLine($"How many {ingredients} would you like to use in your lemonade today?");
+            Console.WriteLine($"How many {ingredient} would you like to use in your lemonade today?");
             }
         }
 
