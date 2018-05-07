@@ -113,122 +113,139 @@ namespace Lemonade_Stand_1
             CreatePlayers(numPlayers);
             int numDays = UserInterface.GetNumGameDays(); //Get number of days from player
             List<Day> gameDays = CreateGameDayList(numDays);
-            UserInterface.DisplayWeatherDay(gameDays[0]); // Give the player the weather for the day
-            UserInterface.DisplayForecast(numDays, gameDays); //Give the player the forecast for the coming week
-            UserInterface.Display("Welcome to the Peabody General Store!"); // Welcome the playe to the store
-            Store store1 = new Store(); // instantiate a new store with its own inventory
-            UserInterface.DisplayPrices(store1);
-            UserInterface.AskToBuy(store1.cup);
+
+            for (int i = 0; i <= gameDays.Count; i++)
+            {
+                UserInterface.DisplayWeatherDay(gameDays[i]); // Give the player the weather for the day
+                UserInterface.DisplayForecast(numDays, gameDays); //Give the player the forecast for the coming week
+
+                if (i < 1)
+                {
+                    UserInterface.Display("Welcome to the Peabody General Store!"); // Welcome the playe to the store
+                }
+                else
+                {
+                    UserInterface.Display("Welcome back to the Peabody General Store!");
+                    
+                    int num = 0;
+                    foreach(Cup item in player1.PlayerInventory)
+                    {
+                        num++;
+                    }
+
+                    UserInterface.Display("Your current inventory is: " + num + " cups.");
+                    num = 0;
+                    foreach (Lemon item in player1.PlayerInventory)
+                    {
+                        num++;
+                    }
+
+                    UserInterface.Display("Your current inventory is: " + num + " lemons.");
+
+                    num = 0;
+                    foreach (Sugar item in player1.PlayerInventory)
+                    {
+                        num++;
+                    }
+
+                    UserInterface.Display("Your current inventory is: " + num + " cups of sugar.");
+                }
+
+                Store store1 = new Store(); // instantiate a new store with its own inventory
+                                            //UserInterface.DisplayPrices(store1);
+                UserInterface.AskToBuy(store1, player1);
+
+                //standInventory = standInventory.CreateInventory(standInventory, numCups, numLemons, numIce, cupsSugar);
+                Stand stand = new Stand();
+                UserInterface.DisplayWeatherDay(gameDays[i]);
+                //10.  Ask the PLAYER OBJECT how many GALLONS (16 cups of lemonade in one gallon) of lemonade she would like to make for THE STAND OBJECT
+                UserInterface.Display("How many gallons of lemonade would you like to make today?  (1 gallon = 16 cups)");
+                string standGallons = Console.ReadLine();
+                stand.Gallons = Int32.Parse(standGallons);
+
+                //-- AND ask the Player Object how many items of EACH SUPPLY she would like to use FROM HER INVENTORY
+                UserInterface.AskNumberToUse("lemons");
+                int numLemonsUse = Int32.Parse(Console.ReadLine());
+
+                //-- Subtract the number of cups, lemons, sugar, and ice from the PLAYER OBJECT INVENTORY OBJECT
+                player1.RemoveFromInventory(numLemonsUse, "lemon");
+                //player1.PlayerInventory.numLemons -= numLemonsUse;
+
+                UserInterface.AskNumberToUse("sugar");
+                int numSugarUse = Int32.Parse(Console.ReadLine());
+                player1.RemoveFromInventory(numSugarUse, "sugar");
+
+                UserInterface.AskNumberToUse("ice");
+                int numIceUse = Int32.Parse(Console.ReadLine());
+                player1.RemoveFromInventory(numIceUse, "ice");
+
+                //ask the player to set the price of each cup of lemonade
+                double priceLemonade = UserInterface.AskForLemonadePrice();
+
+
+                //11.  CREATE LOOP METHODS in CUSTOMER CLASS to determine how many customers will buy and how many cups they will buy
+                int numPayingCustomers = CalculatePayingCustomers(priceLemonade, gameDays[i]);
+                //UserInterface.Display("Today you had " + numPayingCustomers + " paying customers visit your stand.");
+                //Console.ReadLine();
+                int numCupsSold = DetermineNumCupsSold(numPayingCustomers);
+                UserInterface.Display("You sold " + numCupsSold + " cups of lemonade today.");
+                int numCupsLeft = 0;
+                foreach(Supplies item in player1.PlayerInventory)
+                {
+                    if (item.Name == "cup")
+                    {
+                        numCupsLeft++;
+                    }
+                }
+                if (numCupsSold<numCupsLeft)
+                {
+                    player1.RemoveFromInventory(numCupsSold, "cup");
+                }
+                foreach (Lemon item in player1.PlayerInventory)
+                {
+                    if (item.Name == "lemon")
+                    {
+                        item.DecayValue--;
+                    }
+                    if (item.DecayValue == 0)
+                    {
+                        try
+                        {
+                            player1.RemoveFromInventory(1, "lemon");
+                        }
+                        catch (NullReferenceException)
+                        {
+                            return;
+                        }
+                    }
+                }
+                foreach (Ice item in player1.PlayerInventory)
+                {
+                    if (item.Name == "ice")
+                    {
+                        try
+                        {
+                            player1.RemoveFromInventory(1, "ice");
+                        }
+                        catch (NullReferenceException)
+                        {
+                            return;
+                        }
+                    }
+                }
+
+                Console.ReadLine();
+                
+
+                //13.  Tally the Total Amount of money earned 
+                double amountEarned = priceLemonade * numCupsSold;
+                Console.WriteLine($"Today you made a profit of ${amountEarned}");
+                Console.ReadLine();
+                player1.PlayerWallet.Amount = player1.PlayerWallet.Amount + amountEarned;
+                Console.WriteLine($"You have {player1.PlayerWallet.Amount} in your account at the end of today.");
+                Console.ReadLine();
+            }
             
-            player1.GoShopping(store1, player1);
-
-
-            //UserInterface.AskToBuy(store1.Inventory[0].Name);
-            //string numString = Console.ReadLine();
-            //int numItem = Int32.Parse(numString);
-            //double numItemCost = store1.CalculateCost(store1.Inventory[0].Price, numItem);
-            //UserInterface.DisplayTransaction(store1.Inventory[0].Name, numItem, numItemCost, player1.PlayerWallet);
-            //UserInterface.ConfirmPurchase(numItem, numItemCost, player1.PlayerWallet.Amount, store1.Inventory[0].Name, store1, player1);
-
-            //    //START HERE AFTER MAY 4 DOGGY!!!
-            //    double totalCheckOutPrice = store1.Checkout(numCups, numLemons, cupsSugar, numIce);
-
-            //    //DISPLAY total check out price
-            //    UserInterface.DisplayCheckoutPrice(totalCheckOutPrice);
-
-            //    //9.  Subtract the total amount owed from the Player Wallet.  
-            //    try
-            //    {
-            //        player1.PlayerWallet.Debit(player1.PlayerWallet, totalCheckOutPrice);
-            //    }
-            //    catch (Exception)
-            //    {
-            //        Console.WriteLine("You ran out of money!\nGAME OVER!");
-            //        Console.ReadLine();
-            //    }
-
-            //    //DISPLAY the player's wallet status
-            //    UserInterface.DisplayPlayerWalletStatus(player1);
-
-            //    //10.  MOVE the items FROM the STORE INVENTORY OBJECT to the PLAYER INVENTORY OBJECT
-            //    //create player method that updates player inventory
-            //    List<Supplies> playerInventory = supplies.CreateInventory(numCups, numLemons, numIce, cupsSugar);
-            //    player1.PlayerInventory = playerInventory;
-            //}
-
-            //    UserInterface.AskToBuy("lemons");
-            //    supplyItem = "lemons";
-            //    string numLemonsString = Console.ReadLine();
-            //    int numLemons = Int32.Parse(numLemonsString);
-            //    Lemon lemon = new Lemon(supplyItem);
-            //    double numLemonsCost = store1.CalculateCost(lemon.Price, numLemons);
-            //    UserInterface.DisplayStoreTransaction(supplyItem, numLemons, numLemonsCost, player1.PlayerWallet);
-            //    UserInterface.DisplayConfirmation(numLemons, numLemonsCost, player1.PlayerWallet.Amount, supplyItem, store1, player1);
-
-            //    UserInterface.AskToBuy("sugar");
-            //    supplyItem = "sugar";
-            //    string cupsSugarString = Console.ReadLine();
-            //    int cupsSugar = Int32.Parse(cupsSugarString);
-            //    Sugar sugar = new Sugar(supplyItem);
-            //    double cupsSugarCost = store1.CalculateCost(sugar.Price, cupsSugar);
-            //    UserInterface.DisplayStoreTransaction(supplyItem, cupsSugar, cupsSugarCost, player1.PlayerWallet);
-            //    UserInterface.DisplayConfirmation(cupsSugar, cupsSugarCost, player1.PlayerWallet.Amount, supplyItem, store1, player1);
-
-            //    UserInterface.AskToBuy("ice");
-            //    supplyItem = "ice";
-            //    string numIceString = Console.ReadLine();
-            //    int numIce = Int32.Parse(numIceString);
-            //    Ice ice = new Ice(supplyItem);
-            //    double numIceCost = store1.CalculateCost(ice.Price, numIce);
-            //    UserInterface.DisplayStoreTransaction(supplyItem, numIce, numIceCost, player1.PlayerWallet);
-            //    UserInterface.DisplayConfirmation(numIce, numIceCost, player1.PlayerWallet.Amount, supplyItem, store1, player1);
-
-            //8.  Tally the total amount owed by the Player to the Store.
-
-
-            //.  INSTANTIATE a STAND object and CREATE its own INVENTORY object
-            
-
-            //standInventory = standInventory.CreateInventory(standInventory, numCups, numLemons, numIce, cupsSugar);
-            Stand stand = new Stand();
-
-            //10.  Ask the PLAYER OBJECT how many GALLONS (16 cups of lemonade in one gallon) of lemonade she would like to make for THE STAND OBJECT
-            UserInterface.Display("How many gallons of lemonade would you like to make today?  (1 gallon = 16 cups)");
-            string standGallons = Console.ReadLine();
-            stand.Gallons = Int32.Parse(standGallons);
-
-            //-- AND ask the Player Object how many items of EACH SUPPLY she would like to use FROM HER INVENTORY
-            UserInterface.AskNumberToUse("lemons");
-            int numLemonsUse = Int32.Parse(Console.ReadLine());
-
-            //-- Subtract the number of cups, lemons, sugar, and ice from the PLAYER OBJECT INVENTORY OBJECT
-            player1.RemoveFromInventory(numLemonsUse, "lemon");
-            //player1.PlayerInventory.numLemons -= numLemonsUse;
-
-            UserInterface.AskNumberToUse("sugar");
-            int numSugarUse = Int32.Parse(Console.ReadLine());
-            player1.RemoveFromInventory(numSugarUse, "sugar");
-
-            UserInterface.AskNumberToUse("ice");
-            int numIceUse = Int32.Parse(Console.ReadLine());
-            player1.RemoveFromInventory(numIceUse, "ice");
-
-            //ask the player to set the price of each cup of lemonade
-            UserInterface.AskForLemonadePrice();
-            double priceLemonade = Int32.Parse(Console.ReadLine());
-
-            //11.  CREATE LOOP METHODS in CUSTOMER CLASS to determine how many customers will buy and how many cups they will buy
-            int numPayingCustomers = CalculatePayingCustomers(priceLemonade, gameDays[0]);
-            int numCupsSold = DetermineNumCupsSold(numPayingCustomers);
-            //MUST ADD METHOD TO DETERMINE HOW PLAYER RECIPE INFLUENCES CUSTOMER PURCHASE
-
-            //13.  Tally the Total Amount of money earned by the STAND object's WALLET object.  
-            double amountEarned = priceLemonade * numCupsSold;
-            Console.WriteLine($"You sold {numCupsSold} cups of lemonade today for a profit of ${amountEarned}");
-            player1.PlayerWallet.Amount = player1.PlayerWallet.Amount + amountEarned;
-            Console.WriteLine($"You have {player1.PlayerWallet.Amount} in your treasury.");
-            //14.   Add / Subtract the Stand Object's Wallet Object's contents to the Player Object's Wallet Object
-            //15.  Move the cups, sugar, and lemons FROM the STORE INVENTORY OBJECT to the PLAYER INVENTORY OBJECT
         }
     }
 }

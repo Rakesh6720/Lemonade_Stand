@@ -47,14 +47,26 @@ namespace Lemonade_Stand_1
         {
             List<Customer> customerList = new List<Customer>();
             Random random = new Random();
+            int number;
 
-            int number = random.Next(1, 100);
+            if (weather.Temperature >= 40 || weather.Temperature <= 60)
+                {
+                number = random.Next(1, 25);
+            }
+            else if(weather.Temperature >=61)
+            {
+                number = random.Next(25, 200);
+            }
+            else
+            {
+                number = random.Next(1, 25);
+            }
+            
 
             for (int i = 0; i < number; i++)
             {
                 Customer customer = new Customer();
                 customerList.Add(customer);
-
             }
             return customerList;
         }

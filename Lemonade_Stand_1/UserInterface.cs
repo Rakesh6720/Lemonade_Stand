@@ -52,6 +52,8 @@ namespace Lemonade_Stand_1
 
         public static void AskToBuy(Store store1, Player player)
         {
+            List<Supplies> inventory = new List<Supplies>();
+            player.PlayerInventory = inventory;
             Display("Enter the number of the item you'd like to buy: 1) Cups 2) Lemons 3) Sugar 4) Ice 5) exit store ");
             string userInput = Console.ReadLine();
             switch (userInput)
@@ -69,12 +71,13 @@ namespace Lemonade_Stand_1
                         userInput = Console.ReadLine();
                         if (userInput == "y" || userInput == "Y")
                         {
-                            store1.ExecutePurchase(userInputInt, store1.cup.Price, player);
-                            for (int i=0; i<userInputInt; i++)
+                            store1.ExecutePurchase(userInputInt, cupCost, player);
+                            for (int i = 0; i < userInputInt; i++)
                             {
-                                Cup cup = new Cup();
-                                player.PlayerInventory.Add(cup);
+
+                                player.PlayerInventory.Add(new Cup());
                             }
+                            AskToBuy(store1, player);
                             break;
                         }
                         else
@@ -96,12 +99,13 @@ namespace Lemonade_Stand_1
                         userInput = Console.ReadLine();
                         if (userInput == "y" || userInput == "Y")
                         {
-                            store1.ExecutePurchase(userInputInt, store1.cup.Price, player);
+                            store1.ExecutePurchase(userInputInt, lemonCost, player);
                             for (int i = 0; i < userInputInt; i++)
                             {
-                                Cup cup = new Cup();
-                                player.PlayerInventory.Add(cup);
+                                Lemon lemon = new Lemon();
+                                player.PlayerInventory.Add(lemon);
                             }
+                            AskToBuy(store1, player);
                             break;
                         }
                         else
@@ -110,9 +114,67 @@ namespace Lemonade_Stand_1
                             break;
                         }
                     }
-                    
+                case "3":
+                    {
+                        Display("The price per cup of sugar is: $" + store1.sugar.Price + "(6 cups / pound)");
+                        Display("How many cups of sugar would you like to buy?");
+                        userInput = Console.ReadLine();
+                        int userInputInt = Int32.Parse(userInput);
+                        double sugarCost = store1.CalculateCost(store1.sugar.Price, userInputInt);
+                        Display("Your total will be: $" + sugarCost + " for " + userInputInt + " cups of sugar.");
+                        Display("You have $" + player.PlayerWallet.Amount + " in your account.");
+                        Display("Would you like to make this purchase?");
+                        userInput = Console.ReadLine();
+                        if (userInput == "y" || userInput == "Y")
+                        {
+                            store1.ExecutePurchase(userInputInt, sugarCost, player);
+                            for (int i = 0; i < userInputInt; i++)
+                            {
+                                Sugar sugar = new Sugar();
+                                player.PlayerInventory.Add(sugar);
+                            }
+                            AskToBuy(store1, player);
+                            break;
+                        }
+                        else
+                        {
+                            AskToBuy(store1, player);
+                            break;
+                        }
+                    }
+                case "4":
+                    {
+                        Display("The price per pound of ice is: $" + store1.ice.Price + "(20 cups / pound)");
+                        Display("How many pounds of ice would you like to buy?");
+                        userInput = Console.ReadLine();
+                        int userInputInt = Int32.Parse(userInput);
+                        double iceCost = store1.CalculateCost(store1.ice.Price, userInputInt);
+                        Display("Your total will be: $" + iceCost + " for " + userInputInt + " pounds of ice.");
+                        Display("You have $" + player.PlayerWallet.Amount + " in your account.");
+                        Display("Would you like to make this purchase?");
+                        userInput = Console.ReadLine();
+                        if (userInput == "y" || userInput == "Y")
+                        {
+                            store1.ExecutePurchase(userInputInt, iceCost, player);
+                            for (int i = 0; i < userInputInt; i++)
+                            {
+                                Ice ice = new Ice();
+                                player.PlayerInventory.Add(ice);
+                            }
+                            AskToBuy(store1, player);
+                            break;
+                        }
+                        else
+                        {
+                            AskToBuy(store1, player);
+                            break;
+                        }
+                    }
+                case "5":
+                    {
+                        break;
+                    }
             }
-           
         }
         public static void DisplayTransaction(string item, int numItem, double numItemCost, Wallet playerWallet)
           {
@@ -120,24 +182,7 @@ namespace Lemonade_Stand_1
             double theoreticalAmount = playerWallet.Amount - numItemCost;
             Console.WriteLine("Money remaining in your wallet would be: $" + theoreticalAmount + ".");
           }
-        public static void ConfirmPurchase(int numItem, double costItem, double playerWalletAmount, string item, Store store, Player player)
-        {
-            Console.WriteLine("Would you like to confirm this purchase? Y/N");
-            string userInput = Console.ReadLine();
-            if (userInput == "y" || userInput == "Y")
-            {
-                store.ExecutePurchase(numItem, costItem, player);
-            }
-            else if (userInput == "n" || userInput == "N")
-            {
-                AskToBuy(item);
-            }
-            else
-            {
-                Console.WriteLine("Please enter a valid respone: Y/N");
-                ConfirmPurchase(numItem, costItem, player.PlayerWallet.Amount, item, store, player);
-            }
-        }
+      
     public static void DisplayPlayerWalletStatus(Player player)
         {
             Console.WriteLine("You have $" + player.PlayerWallet.Amount + "left in your personal account.");
@@ -169,9 +214,20 @@ namespace Lemonade_Stand_1
             }
         }
 
-        public static void AskForLemonadePrice()
+        public static double AskForLemonadePrice()
         {
             Console.WriteLine("Enter the price of each cup of lemonade: ");
+            try
+            {
+                double priceLemonade = Int32.Parse(Console.ReadLine());
+                return priceLemonade;
+            }
+            catch (FormatException)
+            {
+                UserInterface.Display("Please enter a valid amount.");
+                UserInterface.AskForLemonadePrice();
+                return 1.0;
+            }
         }
         public static void DisplayForecast(int numDays, List<Day> gameDays)
         {

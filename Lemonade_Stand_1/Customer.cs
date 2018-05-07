@@ -9,11 +9,15 @@ namespace Lemonade_Stand_1
     public class Customer
     {
         bool willBuy;
-        //double maxPrice;
+        double maxPrice;
+        int taste;
 
         public Customer()
         {
             this.willBuy = false;
+            Random random = new Random();
+            this.maxPrice = random.Next(1, 10);
+            this.taste = random.Next(1, 10);
         }
         public bool WillBuy
         {
@@ -27,6 +31,29 @@ namespace Lemonade_Stand_1
             }
         }
 
+        public double MaxPrice
+        {
+            get
+            {
+                return maxPrice;
+            }
+            set
+            {
+                maxPrice = value;
+            }
+        }
+
+        public int Taste
+        {
+            get
+            {
+                return taste;
+            }
+            set
+            {
+                taste = value;
+            }
+        }
     
 
         public bool DetermineIfCustomerBuyPrice(Day day, double lemonadePrice)
@@ -133,7 +160,6 @@ namespace Lemonade_Stand_1
                 return false;
             }
         }
-
-        
+       
     }
 }
