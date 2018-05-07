@@ -42,20 +42,77 @@ namespace Lemonade_Stand_1
         
         }
 
-        public static void AskToBuy(string item)
+        public static void DisplayPrices(Store store)
         {
-            if (item == "sugar")
+            Display("the price of cup is " + store.cup.Price);
+            Display("the price of lemon is " + store.lemon.Price);
+            Display("the price of sugar is " + store.sugar.Price);
+            Display("the price of ice is " + store.ice.Price);
+        }
+
+        public static void AskToBuy(Store store1, Player player)
+        {
+            Display("Enter the number of the item you'd like to buy: 1) Cups 2) Lemons 3) Sugar 4) Ice 5) exit store ");
+            string userInput = Console.ReadLine();
+            switch (userInput)
             {
-                Console.WriteLine($"How many cups of {item} would you like to buy (4 cups per pound)?");
+                case "1":
+                    {
+                        Display("The price per cup is: $" + store1.cup.Price);
+                        Display("How many cups would you like to buy?");
+                        userInput = Console.ReadLine();
+                        int userInputInt = Int32.Parse(userInput);
+                        double cupCost = store1.CalculateCost(store1.cup.Price, userInputInt);
+                        Display("Your total will be: $" + cupCost + " for " + userInputInt + " cups.");
+                        Display("You have $" + player.PlayerWallet.Amount + " in your account.");
+                        Display("Would you like to make this purchase?");
+                        userInput = Console.ReadLine();
+                        if (userInput == "y" || userInput == "Y")
+                        {
+                            store1.ExecutePurchase(userInputInt, store1.cup.Price, player);
+                            for (int i=0; i<userInputInt; i++)
+                            {
+                                Cup cup = new Cup();
+                                player.PlayerInventory.Add(cup);
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            AskToBuy(store1, player);
+                            break;
+                        }
+                    }
+                case "2":
+                    {
+                        Display("The price per lemon is: $" + store1.lemon.Price);
+                        Display("How many lemons would you like to buy?");
+                        userInput = Console.ReadLine();
+                        int userInputInt = Int32.Parse(userInput);
+                        double lemonCost = store1.CalculateCost(store1.lemon.Price, userInputInt);
+                        Display("Your total will be: $" + lemonCost + " for " + userInputInt + " lemons.");
+                        Display("You have $" + player.PlayerWallet.Amount + " in your account.");
+                        Display("Would you like to make this purchase?");
+                        userInput = Console.ReadLine();
+                        if (userInput == "y" || userInput == "Y")
+                        {
+                            store1.ExecutePurchase(userInputInt, store1.cup.Price, player);
+                            for (int i = 0; i < userInputInt; i++)
+                            {
+                                Cup cup = new Cup();
+                                player.PlayerInventory.Add(cup);
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            AskToBuy(store1, player);
+                            break;
+                        }
+                    }
+                    
             }
-            else if (item == "ice")
-            {
-                Console.WriteLine($"How many pounds of {item} would you like to buy?");
-            }
-            else
-            {
-                Console.WriteLine($"How many {item}s would you like to buy?");
-            }
+           
         }
         public static void DisplayTransaction(string item, int numItem, double numItemCost, Wallet playerWallet)
           {

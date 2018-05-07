@@ -117,7 +117,8 @@ namespace Lemonade_Stand_1
             UserInterface.DisplayForecast(numDays, gameDays); //Give the player the forecast for the coming week
             UserInterface.Display("Welcome to the Peabody General Store!"); // Welcome the playe to the store
             Store store1 = new Store(); // instantiate a new store with its own inventory
-          
+            UserInterface.DisplayPrices(store1);
+            UserInterface.AskToBuy(store1.cup);
             
             player1.GoShopping(store1, player1);
 

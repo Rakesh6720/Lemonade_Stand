@@ -8,10 +8,10 @@ namespace Lemonade_Stand_1
 {
    public class Store
     {
-        Cup cup;
-        Lemon lemon;
-        Sugar sugar;
-        Ice ice;
+        public Cup cup;
+        public Lemon lemon;
+        public Sugar sugar;
+        public Ice ice;
 
         public Store()
         {
@@ -19,18 +19,10 @@ namespace Lemonade_Stand_1
             Lemon lemon = new Lemon();
             Sugar sugar = new Sugar();
             Ice ice = new Ice();
-        }
-     
-        public List<Supplies> Inventory
-        {
-            get
-            {
-                return inventory;
-            }
-            set
-            {
-                inventory = value;
-            }
+            this.cup = cup;
+            this.lemon = lemon;
+            this.sugar = sugar;
+            this.ice = ice;
         }
 
         public void ExecutePurchase(int numItems, double costItems, Player player)
