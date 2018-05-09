@@ -193,10 +193,6 @@ namespace Lemonade_Stand_1
             Console.WriteLine("Your total bill is: $" + checkoutPrice);
         }
 
-        //public static void AskNumberGallons()
-        //{
-        //    Console.WriteLine("How many gallons of lemonade would you like to make today?  (1 gallon = 16 cups)");
-        //}
 
         public static void AskNumberToUse(string ingredient)
         {
@@ -251,9 +247,7 @@ namespace Lemonade_Stand_1
                 Display($"''{userInput}'' is not a valid respone.");
                 DisplayForecast(numDays, gameDays);
             }
-
-            
-                
+       
          }
         public static void DisplayWeatherDay(Day day)
         {

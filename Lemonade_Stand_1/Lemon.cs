@@ -10,7 +10,6 @@ namespace Lemonade_Stand_1
     {
         string name;
         double price;
-        //int amount;
         int decayValue; 
 
 
